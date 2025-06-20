@@ -1,7 +1,10 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Phone, Globe, ShieldAlert, LifeBuoy, Siren } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardFooter } from '@/components/ui/card'; // Removed CardTitle
+import { Alert, AlertDescription } from '@/components/ui/alert'; // Removed AlertTitle
+import { Phone, Globe, ShieldAlert, LifeBuoy, Siren, Badge } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
 
 interface Resource {
   id: string;
@@ -26,7 +29,7 @@ export default function EmergencyHelpPage() {
     <Container>
       <div className="text-center mb-12">
         <Siren className="mx-auto h-16 w-16 text-destructive mb-4" />
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-destructive">Emergency Help & Resources</h1>
+        <BlurText text="Emergency Help & Resources" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-destructive" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
           If you are in immediate danger, please call your local emergency number (e.g., 911, 112).
           Below are additional resources for support.
@@ -35,7 +38,7 @@ export default function EmergencyHelpPage() {
 
       <Alert variant="destructive" className="mb-12">
         <ShieldAlert className="h-5 w-5" />
-        <AlertTitle className="font-bold">Immediate Danger</AlertTitle>
+        <BlurText text="Immediate Danger" className="font-bold mb-1 leading-none tracking-tight" />
         <AlertDescription>
           If you or someone you know is in immediate danger, please contact your local emergency services immediately.
           This page provides resources but is not a substitute for emergency response.
@@ -48,11 +51,16 @@ export default function EmergencyHelpPage() {
             <CardHeader>
               <div className="flex items-center gap-3 mb-2">
                 <LifeBuoy className="h-7 w-7 text-primary" />
-                <CardTitle className="font-headline">{resource.name}</CardTitle>
+                <BlurText text={resource.name} className="font-headline text-2xl font-semibold leading-none tracking-tight" />
               </div>
-              <Badge variant={resource.type === 'hotline' ? 'destructive' : resource.type === 'local' ? 'secondary' : 'outline'} className="capitalize">
+              {/* Using Badge component from lucide-react, assuming it's what was intended from UI. If shadcn/ui Badge, import that. */}
+              {/* For now, assuming it's a styled div or span if Badge from lucide is not a component */}
+              <div className={`capitalize px-2 py-0.5 text-xs font-semibold rounded-full border inline-flex items-center
+                ${resource.type === 'hotline' ? 'border-destructive bg-destructive text-destructive-foreground' : 
+                  resource.type === 'local' ? 'border-secondary bg-secondary text-secondary-foreground' : 
+                  'border-foreground text-foreground'}`}>
                 {resource.type}
-              </Badge>
+              </div>
             </CardHeader>
             <CardContent className="flex-grow">
               <p className="text-sm text-muted-foreground">{resource.description}</p>

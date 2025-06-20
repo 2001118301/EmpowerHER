@@ -1,6 +1,9 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
 import { CommunityStoryCard } from './(components)/community-story-card';
 import { HeartHandshake } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
 
 const stories = [
   { id: 'story-1', title: 'How Learning to Code Changed My Life', type: 'Article', excerpt: 'Follow Maria\'s journey from a beginner to a freelance web developer through Empower Hub courses.', imageUrl: 'https://placehold.co/600x400.png', author: 'Maria S.', imageHint: 'woman coding laptop' },
@@ -15,7 +18,7 @@ export default function CommunityStoriesPage() {
     <Container>
       <div className="text-center mb-12">
         <HeartHandshake className="mx-auto h-16 w-16 text-primary mb-4" />
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary">Inspiring Community Stories</h1>
+        <BlurText text="Inspiring Community Stories" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
           Read articles, watch videos, and hear testimonials from members of the Empower Hub community.
         </p>

@@ -1,9 +1,12 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardDescription } from '@/components/ui/card'; // Removed CardTitle
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Film, Newspaper, Quote, ExternalLink } from 'lucide-react'; // Icons for type
+import BlurText from '@/components/shared/blur-text';
 
 interface CommunityStoryCardProps {
   id: string;
@@ -47,7 +50,7 @@ export function CommunityStoryCard({ id, title, type, excerpt, imageUrl, author,
           </Badge>
           {author && <span className="text-xs text-muted-foreground">By {author}</span>}
         </div>
-        <CardTitle className="text-lg md:text-xl font-semibold mb-2 font-headline">{title}</CardTitle>
+        <BlurText text={title} className="text-lg md:text-xl font-semibold mb-2 font-headline" />
         <CardDescription className="text-sm text-muted-foreground line-clamp-3">
           {type === 'Testimonial' && <Quote size={14} className="inline mr-1 -mt-1 text-muted-foreground/70"/>}
           {excerpt}

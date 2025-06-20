@@ -1,9 +1,12 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, UserCircle, CalendarDays } from 'lucide-react';
 import Link from 'next/link';
+import BlurText from '@/components/shared/blur-text';
 
 // Mock story data, in a real app this would come from a DB
 const storiesData = [
@@ -20,7 +23,7 @@ export default function StoryDetailsPage({ params }: { params: { storyId: string
     return (
       <Container>
         <div className="text-center py-20">
-          <h1 className="text-3xl font-bold text-destructive">Story Not Found</h1>
+          <BlurText text="Story Not Found" className="text-3xl font-bold text-destructive" />
           <p className="text-muted-foreground mt-4">The story you are looking for does not exist or may have been moved.</p>
           <Button asChild className="mt-8">
             <Link href="/community">Back to Community Stories</Link>
@@ -39,7 +42,7 @@ export default function StoryDetailsPage({ params }: { params: { storyId: string
       <article>
         <header className="mb-8">
           <Badge variant="secondary" className="mb-2 text-sm">{story.type}</Badge>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3 font-headline text-primary">{story.title}</h1>
+          <BlurText text={story.title} className="text-3xl md:text-4xl font-bold mb-3 font-headline text-primary" />
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
             {story.author && (
               <span className="flex items-center gap-1.5"><UserCircle size={16}/> {story.author}</span>

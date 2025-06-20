@@ -1,9 +1,12 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader, CardDescription } from '@/components/ui/card'; // Removed CardTitle
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Tag } from 'lucide-react'; // Placeholder for category icon, can be more specific
+import { Tag } from 'lucide-react'; 
+import BlurText from '@/components/shared/blur-text';
 
 interface CourseCardProps {
   id: string;
@@ -11,7 +14,7 @@ interface CourseCardProps {
   description: string;
   imageUrl: string;
   category: string;
-  progress?: number; // Optional progress percentage (0-100)
+  progress?: number; 
   imageHint: string;
 }
 
@@ -34,7 +37,7 @@ export function CourseCard({ id, title, description, imageUrl, category, progres
           <Tag size={14} className="text-primary"/>
           <span>{category}</span>
         </div>
-        <CardTitle className="text-lg md:text-xl font-semibold mb-2 font-headline">{title}</CardTitle>
+        <BlurText text={title} className="text-lg md:text-xl font-semibold mb-2 font-headline" />
         <CardDescription className="text-sm text-muted-foreground line-clamp-3">
           {description}
         </CardDescription>

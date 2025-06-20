@@ -1,9 +1,12 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { BookOpenText, CheckCircle, Clock } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
 
 // Mock course data, in a real app this would come from a DB
 const coursesData = [
@@ -20,7 +23,7 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
     return (
       <Container>
         <div className="text-center py-20">
-          <h1 className="text-3xl font-bold text-destructive">Course Not Found</h1>
+          <BlurText text="Course Not Found" className="text-3xl font-bold text-destructive" />
           <p className="text-muted-foreground mt-4">The course you are looking for does not exist or may have been moved.</p>
           <Button asChild className="mt-8">
             <a href="/courses">Back to Courses</a>
@@ -43,15 +46,15 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
               data-ai-hint={course.imageHint}
             />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-3 font-headline text-primary">{course.title}</h1>
+          <BlurText text={course.title} className="text-3xl md:text-4xl font-bold mb-3 font-headline text-primary" />
           <Badge variant="secondary" className="mb-4 text-sm">{course.category}</Badge>
           <p className="text-lg text-muted-foreground mb-6">{course.description}</p>
           
           <div className="prose prose-lg max-w-none dark:prose-invert">
-            <h2 className="text-2xl font-semibold mb-3 font-headline">About this course</h2>
+            <BlurText text="About this course" className="text-2xl font-semibold mb-3 font-headline" />
             <p>{course.longDescription}</p>
             {/* Placeholder for curriculum/modules list */}
-            <h3 className="text-xl font-semibold mt-6 mb-3 font-headline">What you'll learn</h3>
+            <BlurText text="What you'll learn" className="text-xl font-semibold mt-6 mb-3 font-headline" />
             <ul className="list-disc pl-5 space-y-1">
               <li>Core concepts of {course.category.toLowerCase()}</li>
               <li>Practical skills through hands-on projects</li>
@@ -64,7 +67,7 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
         <div className="md:col-span-1">
           <div className="sticky top-24 space-y-6">
             <div className="bg-card p-6 rounded-lg shadow-lg border">
-              <h2 className="text-xl font-semibold mb-4 font-headline">Course Overview</h2>
+              <BlurText text="Course Overview" className="text-xl font-semibold mb-4 font-headline" />
               <div className="space-y-3 text-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground flex items-center gap-2"><Clock size={16}/> Duration:</span>
@@ -93,7 +96,7 @@ export default function CourseDetailsPage({ params }: { params: { courseId: stri
             </div>
             {/* Related courses placeholder */}
             <div className="bg-card p-6 rounded-lg shadow-lg border">
-              <h3 className="text-lg font-semibold mb-3 font-headline">Related Courses</h3>
+              <BlurText text="Related Courses" className="text-lg font-semibold mb-3 font-headline" />
               <ul className="space-y-2 text-sm">
                 <li><a href="#" className="text-primary hover:underline">Advanced {course.category}</a></li>
                 <li><a href="#" className="text-primary hover:underline">{course.category} for Business</a></li>

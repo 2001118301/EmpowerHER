@@ -1,9 +1,12 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardFooter } from '@/components/ui/card'; // Removed CardTitle
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle, Target, Award, ShieldCheck, Edit3, PlusCircle } from 'lucide-react';
 import Image from 'next/image';
+import BlurText from '@/components/shared/blur-text';
 
 const userProgress = {
   name: "Aisha K.", // Example user
@@ -35,7 +38,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-4 mb-6 md:mb-0">
           <Image src={userProgress.avatarUrl} alt={userProgress.name} width={80} height={80} className="rounded-full border-2 border-primary shadow-md" data-ai-hint={userProgress.avatarHint} />
           <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary">Welcome back, {userProgress.name}!</h1>
+            <BlurText text={`Welcome back, ${userProgress.name}!`} className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary" />
             <p className="text-muted-foreground">Here's an overview of your learning journey.</p>
           </div>
         </div>
@@ -44,13 +47,13 @@ export default function DashboardPage() {
 
       {/* Current Courses */}
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 font-headline">My Active Courses</h2>
+        <BlurText text="My Active Courses" className="text-2xl font-semibold mb-6 font-headline" />
         {userProgress.currentCourses.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {userProgress.currentCourses.map(course => (
               <Card key={course.title} className="shadow-lg">
                 <CardHeader>
-                  <CardTitle>{course.title}</CardTitle>
+                  <BlurText text={course.title} className="text-2xl font-semibold leading-none tracking-tight" />
                 </CardHeader>
                 <CardContent>
                   <Progress value={course.progress} className="mb-2 h-3" aria-label={`${course.title} progress ${course.progress}%`} />
@@ -70,7 +73,7 @@ export default function DashboardPage() {
       {/* Goals Section */}
       <section className="mb-12">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold font-headline">My Goals</h2>
+          <BlurText text="My Goals" className="text-2xl font-semibold font-headline" />
           <Button variant="outline" size="sm"><PlusCircle size={16} className="mr-2"/> Add New Goal</Button>
         </div>
         {userProgress.goals.length > 0 ? (
@@ -97,13 +100,13 @@ export default function DashboardPage() {
 
       {/* Certificates Section */}
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 font-headline">My Certificates</h2>
+        <BlurText text="My Certificates" className="text-2xl font-semibold mb-6 font-headline" />
         {userProgress.completedCourses.filter(c => c.certificateId).length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {userProgress.completedCourses.filter(c => c.certificateId).map(course => (
             <Card key={course.certificateId} className="shadow-lg text-center p-6 bg-gradient-to-br from-primary/5 to-accent/5">
               <ShieldCheck className="mx-auto h-12 w-12 text-green-500 mb-3" />
-              <CardTitle className="text-lg font-semibold">{course.title}</CardTitle>
+              <BlurText text={course.title} className="text-lg font-semibold leading-none tracking-tight" />
               <CardDescription className="text-xs text-muted-foreground mb-4">Certificate ID: {course.certificateId}</CardDescription>
               <Button variant="outline" size="sm">Download Certificate</Button>
             </Card>
@@ -116,7 +119,7 @@ export default function DashboardPage() {
 
       {/* Badges Section */}
       <section>
-        <h2 className="text-2xl font-semibold mb-6 font-headline">Earned Badges</h2>
+        <BlurText text="Earned Badges" className="text-2xl font-semibold mb-6 font-headline" />
         {userProgress.badges.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {userProgress.badges.map((badge, index) => (

@@ -1,7 +1,10 @@
+"use client";
+
 import Image from 'next/image';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { Button } from '@/components/ui/button';
 import { ExternalLink, User } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
 
 interface PortfolioItemCardProps {
   title: string;
@@ -27,7 +30,7 @@ export function PortfolioItemCard({ title, creator, description, imageUrl, proje
         </div>
       </CardHeader>
       <CardContent className="flex-grow p-4 md:p-6">
-        <CardTitle className="text-lg md:text-xl font-semibold mb-2 font-headline">{title}</CardTitle>
+        <BlurText text={title} className="text-lg md:text-xl font-semibold mb-2 font-headline leading-none tracking-tight" />
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
           <User size={14} className="text-primary"/>
           <span>By: {creator}</span>

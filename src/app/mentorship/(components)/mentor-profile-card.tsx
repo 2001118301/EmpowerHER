@@ -1,8 +1,11 @@
+"use client";
+
 import Image from 'next/image';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { MessageSquare, UserCheck } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
 
 interface MentorProfileCardProps {
   name: string;
@@ -25,7 +28,7 @@ export function MentorProfileCard({ name, expertise, bio, imageUrl, imageHint }:
             data-ai-hint={imageHint}
           />
         </div>
-        <CardTitle className="text-xl font-bold font-headline">{name}</CardTitle>
+        <BlurText text={name} className="text-xl font-bold font-headline leading-none tracking-tight" />
         <div className="flex flex-wrap justify-center gap-2 mt-2">
           {expertise.map(skill => (
             <Badge key={skill} variant="secondary" className="bg-primary/10 text-primary">{skill}</Badge>

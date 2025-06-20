@@ -1,12 +1,15 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { MentorProfileCard } from './(components)/mentor-profile-card';
 import { Users, MessageCircle, UserPlus, Send, Paperclip, Smile } from 'lucide-react';
 import Image from 'next/image';
+import BlurText from '@/components/shared/blur-text';
 
 const mentors = [
   { name: 'Aisha Khan', expertise: ['Web Development', 'JavaScript'], bio: 'Software engineer with 5+ years of experience, passionate about helping beginners.', imageUrl: 'https://placehold.co/100x100.png', imageHint: 'woman smiling professional' },
@@ -19,7 +22,7 @@ export default function MentorshipPage() {
     <Container>
       <div className="text-center mb-12">
         <Users className="mx-auto h-16 w-16 text-primary mb-4" />
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary">Mentorship Program</h1>
+        <BlurText text="Mentorship Program" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
           Connect with experienced mentors, get guidance, and accelerate your learning journey.
         </p>
@@ -27,7 +30,7 @@ export default function MentorshipPage() {
 
       {/* Mentor Profiles Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center font-headline">Meet Our Mentors</h2>
+        <BlurText text="Meet Our Mentors" className="text-3xl font-bold mb-8 text-center font-headline" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {mentors.map((mentor) => (
             <MentorProfileCard
@@ -44,12 +47,12 @@ export default function MentorshipPage() {
 
       {/* Mentor Chat Placeholder Section */}
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center font-headline">Mentor Chat</h2>
+        <BlurText text="Mentor Chat" className="text-3xl font-bold mb-8 text-center font-headline" />
         <Card className="shadow-xl overflow-hidden">
           <CardHeader className="bg-primary text-primary-foreground">
             <div className="flex items-center gap-3">
               <MessageCircle size={28}/>
-              <CardTitle className="text-2xl font-bold font-headline">Secure Messaging</CardTitle>
+              <BlurText text="Secure Messaging" className="text-2xl font-bold font-headline leading-none tracking-tight" />
             </div>
             <CardDescription className="text-primary-foreground/80">Connect with your mentor through our secure chat platform.</CardDescription>
           </CardHeader>
@@ -121,7 +124,7 @@ export default function MentorshipPage() {
           <CardHeader>
             <div className="flex items-center gap-3">
                 <UserPlus size={28} className="text-primary"/>
-                <CardTitle className="text-2xl font-bold font-headline text-primary">Become a Mentor</CardTitle>
+                <BlurText text="Become a Mentor" className="text-2xl font-bold font-headline text-primary leading-none tracking-tight" />
             </div>
             <CardDescription>Share your knowledge and experience. Help shape the next generation of talent.</CardDescription>
           </CardHeader>

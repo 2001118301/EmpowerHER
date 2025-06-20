@@ -1,8 +1,11 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
 import { PortfolioItemCard } from './(components)/portfolio-item-card';
 import { PortfolioUploadForm } from './(components)/portfolio-upload-form';
 import { Separator } from '@/components/ui/separator';
 import { GalleryHorizontalEnd } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
 
 const portfolioItems = [
   { title: 'Handcrafted Pottery Collection', creator: 'Elena Rodriguez', description: 'A series of unique, earth-toned ceramic pieces inspired by nature.', imageUrl: 'https://placehold.co/600x400.png', projectUrl: '#', imageHint: 'pottery ceramics handmade' },
@@ -16,7 +19,7 @@ export default function ShowcasePage() {
     <Container>
       <div className="text-center mb-12">
         <GalleryHorizontalEnd className="mx-auto h-16 w-16 text-primary mb-4" />
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary">Community Showcase & Portfolio</h1>
+        <BlurText text="Community Showcase & Portfolio" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
           Discover amazing work from our community members and share your own creations.
         </p>
@@ -29,7 +32,7 @@ export default function ShowcasePage() {
       <Separator className="my-12" />
 
       <div>
-        <h2 className="text-3xl font-bold mb-8 text-center font-headline">Featured Works</h2>
+        <BlurText text="Featured Works" className="text-3xl font-bold mb-8 text-center font-headline" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2"> {/* Note: XL is 2 cols for wider cards */}
           {portfolioItems.map((item, index) => (
             <PortfolioItemCard

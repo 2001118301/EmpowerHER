@@ -6,12 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Loader2, Sparkles, AlertTriangleIcon } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert'; // Removed AlertTitle
+import { Loader2, Sparkles } from 'lucide-react';
 import { suggestPersonalizedLearningPaths, type PersonalizedLearningPathsOutput } from '@/ai/flows/personalized-learning-paths';
 import { useToast } from "@/hooks/use-toast";
+import BlurText from '@/components/shared/blur-text';
 
 const formSchema = z.object({
   userProfile: z.string().min(50, { message: "Please describe your interests and goals in at least 50 characters." }),
@@ -67,7 +68,7 @@ export function PersonalizedLearningForm() {
       <CardHeader>
         <div className="flex items-center gap-2">
           <Sparkles className="h-8 w-8 text-primary" />
-          <CardTitle className="text-2xl font-bold font-headline text-primary">Discover Your Personalized Learning Path</CardTitle>
+          <BlurText text="Discover Your Personalized Learning Path" className="text-2xl font-bold font-headline text-primary" />
         </div>
         <CardDescription>
           Tell us about your interests, goals, and any prior experience. Our AI will suggest learning paths tailored for you from our available courses.
@@ -121,7 +122,7 @@ export function PersonalizedLearningForm() {
 
       {suggestions && (
         <CardContent className="mt-6 border-t pt-6">
-          <h3 className="text-xl font-semibold mb-4 font-headline text-primary">Here are your suggested learning paths:</h3>
+          <BlurText text="Here are your suggested learning paths:" className="text-xl font-semibold mb-4 font-headline text-primary" />
           {suggestions.suggestedLearningPaths.length > 0 ? (
              <ul className="space-y-3 list-disc list-inside mb-4">
               {suggestions.suggestedLearningPaths.map((path, index) => (
@@ -133,7 +134,7 @@ export function PersonalizedLearningForm() {
           )}
           <Alert variant="default" className="bg-primary/5 border-primary/20">
              <Sparkles className="h-5 w-5 text-primary" />
-            <AlertTitle className="font-semibold text-primary">Reasoning</AlertTitle>
+            <BlurText text="Reasoning" className="font-semibold text-primary mb-1 leading-none tracking-tight" />
             <AlertDescription className="text-primary/80">
               {suggestions.reasoning}
             </AlertDescription>

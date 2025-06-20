@@ -6,10 +6,11 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { UploadCloud } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
+import BlurText from '@/components/shared/blur-text';
 
 const portfolioSchema = z.object({
   title: z.string().min(5, { message: "Title must be at least 5 characters." }),
@@ -50,7 +51,7 @@ export function PortfolioUploadForm() {
       <CardHeader>
         <div className="flex items-center gap-3">
           <UploadCloud className="h-8 w-8 text-primary" />
-          <CardTitle className="text-2xl font-bold font-headline text-primary">Upload Your Work</CardTitle>
+          <BlurText text="Upload Your Work" className="text-2xl font-bold font-headline text-primary leading-none tracking-tight" />
         </div>
         <CardDescription>Share your projects, designs, or handmade creations with the community.</CardDescription>
       </CardHeader>

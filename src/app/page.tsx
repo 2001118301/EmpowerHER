@@ -1,9 +1,12 @@
+"use client";
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/shared/container';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { MapPin, Users, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
+import BlurText from '@/components/shared/blur-text';
 
 export default function HomePage() {
   return (
@@ -22,9 +25,7 @@ export default function HomePage() {
            <div className="absolute inset-0 bg-black/30"></div>
         </div>
         <Container className="relative z-10 text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline">
-            Welcome to <span className="text-yellow-300">Empower Hub</span>
-          </h1>
+          <BlurText text="Welcome to Empower Hub" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline" />
           <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-primary-foreground/90">
             Unlocking potential, fostering creativity, and building futures. Join our community to learn, grow, and make an impact.
           </p>
@@ -42,7 +43,7 @@ export default function HomePage() {
       {/* Introduction Section */}
       <Container>
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary">Our Mission</h2>
+          <BlurText text="Our Mission" className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary" />
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Empower Hub is dedicated to providing accessible education, mentorship, and resources to help individuals achieve their goals and build a brighter future for themselves and their communities.
           </p>
@@ -54,7 +55,7 @@ export default function HomePage() {
         <Container className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <Card className="shadow-lg hover:shadow-xl transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Learners Enrolled</CardTitle>
+              <BlurText text="Learners Enrolled" className="text-sm font-medium leading-none tracking-tight" />
               <Users className="h-5 w-5 text-primary" />
             </CardHeader>
             <CardContent>
@@ -64,7 +65,7 @@ export default function HomePage() {
           </Card>
           <Card className="shadow-lg hover:shadow-xl transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Courses Available</CardTitle>
+              <BlurText text="Courses Available" className="text-sm font-medium leading-none tracking-tight" />
               <BarChart3 className="h-5 w-5 text-primary" />
             </CardHeader>
             <CardContent>
@@ -74,7 +75,7 @@ export default function HomePage() {
           </Card>
           <Card className="shadow-lg hover:shadow-xl transition-shadow">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Community Impact</CardTitle>
+              <BlurText text="Community Impact" className="text-sm font-medium leading-none tracking-tight" />
               <MapPin className="h-5 w-5 text-primary" />
             </CardHeader>
             <CardContent>
@@ -89,7 +90,7 @@ export default function HomePage() {
       <Container>
          <Card className="shadow-lg">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center text-primary font-headline">Our Global Impact</CardTitle>
+            <BlurText text="Our Global Impact" className="text-2xl font-bold text-center text-primary font-headline leading-none tracking-tight" />
           </CardHeader>
           <CardContent className="aspect-video bg-gray-200 rounded-md flex items-center justify-center">
              <Image 

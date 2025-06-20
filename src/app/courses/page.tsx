@@ -1,7 +1,10 @@
+"use client";
+
 import { Container } from '@/components/shared/container';
 import { CourseCard } from './(components)/course-card';
 import { PersonalizedLearningForm } from './(components)/personalized-learning-form';
 import { Separator } from '@/components/ui/separator';
+import BlurText from '@/components/shared/blur-text';
 
 const courses = [
   { id: 'web-dev-intro', title: 'Introduction to Web Development', description: 'Learn the fundamentals of HTML, CSS, and JavaScript to build your first websites.', imageUrl: 'https://placehold.co/600x400.png', category: 'Technology', progress: 25, imageHint: 'laptop code' },
@@ -19,7 +22,7 @@ export function CourseDetailsPage({ params }: { params: { courseId: string } }) 
 
   return (
     <Container>
-      <h1 className="text-3xl font-bold mb-4">{course.title}</h1>
+      <BlurText text={course.title} className="text-3xl font-bold mb-4" />
       <p>{course.description}</p>
       {/* Add more course content here */}
     </Container>
@@ -31,7 +34,7 @@ export default function CoursesPage() {
   return (
     <Container>
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary">Our Courses</h1>
+        <BlurText text="Our Courses" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
           Browse our diverse range of courses designed to equip you with valuable skills.
         </p>
@@ -44,7 +47,7 @@ export default function CoursesPage() {
       <Separator className="my-12" />
 
       <div>
-        <h2 className="text-3xl font-bold mb-8 text-center font-headline">Explore All Courses</h2>
+        <BlurText text="Explore All Courses" className="text-3xl font-bold mb-8 text-center font-headline" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
           {courses.map((course) => (
             <CourseCard
