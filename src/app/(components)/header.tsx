@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from 'next/link';
@@ -18,6 +19,8 @@ import {
   Globe,
   Settings,
   LogOut,
+  Award, // For Success Stories
+  Gift,  // For Donate
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -37,7 +40,7 @@ const navLinks: NavLinkItem[] = [
   { href: '/mentorship', label: 'Mentorship', icon: Users },
   { href: '/showcase', label: 'Showcase', icon: GalleryHorizontalEnd },
   { href: '/community', label: 'Community', icon: HeartHandshake },
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/success-stories', label: 'Success Stories', icon: Award },
 ];
 
 export function Header() {
@@ -51,9 +54,13 @@ export function Header() {
           variant="ghost"
           asChild
           className={cn(
-            "justify-start text-sm font-medium",
-            pathname === link.href ? "bg-accent text-accent-foreground" : "hover:bg-accent/50",
-            isMobile ? "w-full text-base py-3" : ""
+            "justify-start text-sm font-medium h-auto py-2 px-3", 
+            pathname === link.href 
+              ? "text-primary border-b-2 border-primary rounded-none" 
+              : "hover:text-primary/80 hover:bg-transparent", 
+            isMobile ? "w-full text-base py-3 border-none hover:bg-accent/50" 
+                     : "hover:border-b-2 hover:border-primary/50",
+            pathname === link.href && isMobile ? "bg-accent text-accent-foreground" : ""
           )}
         >
           <Link href={link.href} className="flex items-center gap-2">
@@ -81,7 +88,18 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Button variant="destructive" size="sm" asChild className="hidden sm:flex items-center gap-1.5">
+          <Button 
+            variant="default" 
+            size="sm" 
+            asChild 
+            className="hidden sm:flex items-center gap-1.5 bg-accent hover:bg-accent/90 text-accent-foreground transition-transform hover:scale-105 active:scale-95"
+          >
+            <Link href="/donate">
+              <Gift size={16} />
+              Donate
+            </Link>
+          </Button>
+           <Button variant="destructive" size="sm" asChild className="hidden sm:flex items-center gap-1.5">
             <Link href="/emergency">
               <Siren size={16} />
               Emergency
@@ -139,7 +157,18 @@ export function Header() {
                 </div>
                 <nav className="flex flex-col gap-2">
                   <NavLinksContent isMobile={true} />
-                   <Button variant="destructive" size="sm" asChild className="flex items-center gap-1.5 mt-4 w-full text-base py-3">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    asChild 
+                    className="flex items-center gap-1.5 mt-4 w-full text-base py-3 bg-accent hover:bg-accent/90 text-accent-foreground"
+                  >
+                    <Link href="/donate">
+                      <Gift size={20} />
+                      Donate Now
+                    </Link>
+                  </Button>
+                   <Button variant="destructive" size="sm" asChild className="flex items-center gap-1.5 mt-2 w-full text-base py-3">
                     <Link href="/emergency">
                       <Siren size={20} />
                       Emergency Help
