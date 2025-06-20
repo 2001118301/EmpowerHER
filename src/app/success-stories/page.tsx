@@ -3,7 +3,7 @@
 
 import { Container } from '@/components/shared/container';
 import BlurText from '@/components/shared/blur-text';
-import { Award, Film, BookOpen, Send } from 'lucide-react';
+import { Award, Send } from 'lucide-react';
 import { successStoriesData, type SuccessStory } from '@/lib/success-story-data';
 import { SuccessStoryCard } from './(components)/success-story-card';
 import { Button } from '@/components/ui/button';
@@ -35,9 +35,33 @@ export default function SuccessStoriesPage() {
       {/* Success Stories Grid */}
       {successStoriesData.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {successStoriesData.map((story) => (
-            <SuccessStoryCard key={story.id} story={story} />
-          ))}
+          {successStoriesData.map((story) => {
+            if (story.id === 'empowering-rural-women-video') {
+              return (
+                <div key={story.id} className="rounded-lg shadow-lg overflow-hidden bg-card">
+                  <div className="aspect-video">
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/Gr89BWDGt6g?si=XMESk2CQEh1fsYbF"
+                      title={story.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      className="bg-muted" // Background for loading state
+                    ></iframe>
+                  </div>
+                  {/* Optional: Add a title or brief summary below if desired, similar to a card */}
+                  <div className="p-4">
+                     <BlurText text={story.title} className="text-md font-semibold mb-1 font-headline line-clamp-2" />
+                     <p className="text-xs text-muted-foreground line-clamp-2">{story.summary}</p>
+                  </div>
+                </div>
+              );
+            }
+            return <SuccessStoryCard key={story.id} story={story} />;
+          })}
         </div>
       ) : (
         <div className="mt-12 py-10 text-center border-2 border-dashed border-muted-foreground/30 rounded-lg">
