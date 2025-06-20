@@ -51,42 +51,6 @@ export default function HomePage() {
         </div>
       </Container>
       
-      {/* Stats/Impact Section */}
-      <div className="bg-muted">
-        <Container className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          <Card className="shadow-lg hover:shadow-xl transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <BlurText text="Learners Enrolled" className="text-sm font-medium leading-none tracking-tight" />
-              <Users className="h-5 w-5 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">1,200+</div>
-              <p className="text-xs text-muted-foreground">+50 this month</p>
-            </CardContent>
-          </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <BlurText text="Courses Available" className="text-sm font-medium leading-none tracking-tight" />
-              <BarChart3 className="h-5 w-5 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">50+</div>
-              <p className="text-xs text-muted-foreground">Covering diverse skills</p>
-            </CardContent>
-          </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <BlurText text="Community Impact" className="text-sm font-medium leading-none tracking-tight" />
-              <MapPin className="h-5 w-5 text-primary" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">5 Regions</div>
-              <p className="text-xs text-muted-foreground">Expanding our reach</p>
-            </CardContent>
-          </Card>
-        </Container>
-      </div>
-
       {/* Impact Map Placeholder */}
       <Container>
          <Card className="shadow-lg">
