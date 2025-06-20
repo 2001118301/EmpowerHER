@@ -112,21 +112,23 @@ export default function CoursesPage() {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-           <p className="text-xs text-muted-foreground mt-1 text-center sm:text-left">Full search functionality with advanced filtering coming soon.</p>
+           <p className="text-xs text-muted-foreground mt-2 text-center sm:text-left">
+             Find free, empowering courses across key life skills. Full search functionality with advanced filtering coming soon.
+           </p>
         </div>
 
         <Tabs value={selectedCategory} onValueChange={handleTabChange} className="w-full">
-          <div className="flex justify-center mb-8">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:w-auto bg-card p-1.5 rounded-lg shadow-sm border border-primary/10 gap-1">
+          <div className="flex justify-center mb-8 overflow-hidden">
+            <TabsList className="flex overflow-x-auto whitespace-nowrap p-1.5 rounded-lg shadow-sm border border-primary/10 gap-2 bg-transparent">
               {allTabCategories.map(cat => {
                 const CategoryIcon = cat.icon;
                 return (
                   <TabsTrigger
                     key={cat.name}
                     value={cat.name}
-                    className="flex-1 lg:flex-initial data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md px-3 py-1.5 text-xs sm:text-sm rounded-md"
+                    className="flex-shrink-0 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-lg px-4 py-2 text-xs sm:text-sm rounded-full font-medium transition-all hover:bg-primary/10 hover:text-primary"
                   >
-                    <CategoryIcon size={16} className="mr-1.5 hidden sm:inline-block" />
+                    <CategoryIcon size={16} className="mr-2 hidden sm:inline-block" />
                     {cat.name}
                   </TabsTrigger>
                 );
