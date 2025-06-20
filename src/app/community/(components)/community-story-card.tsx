@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -32,8 +33,8 @@ export function CommunityStoryCard({ id, title, type, excerpt, imageUrl, author,
           <Image
             src={imageUrl}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill={true}
+            className="object-cover"
             data-ai-hint={imageHint}
           />
            {type === 'Video' && (
@@ -67,3 +68,4 @@ export function CommunityStoryCard({ id, title, type, excerpt, imageUrl, author,
     </Card>
   );
 }
+

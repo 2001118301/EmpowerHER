@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -23,8 +24,8 @@ export function MentorProfileCard({ name, expertise, bio, imageUrl, imageHint }:
           <Image
             src={imageUrl}
             alt={name}
-            layout="fill"
-            objectFit="cover"
+            fill={true}
+            className="object-cover"
             data-ai-hint={imageHint}
           />
         </div>
@@ -47,3 +48,4 @@ export function MentorProfileCard({ name, expertise, bio, imageUrl, imageHint }:
     </Card>
   );
 }
+

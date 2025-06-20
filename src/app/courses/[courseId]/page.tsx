@@ -73,8 +73,8 @@ export default function CourseDetailsPage({ params: paramsPromise }: { params: P
             <Image
               src={course.imageUrl}
               alt={course.title}
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              className="object-cover"
               data-ai-hint={course.imageHint}
             />
           </div>
@@ -196,3 +196,4 @@ export default function CourseDetailsPage({ params: paramsPromise }: { params: P
     </Container>
   );
 }
+

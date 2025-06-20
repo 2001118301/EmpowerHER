@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Container } from '@/components/shared/container';
@@ -69,8 +70,8 @@ export default function StoryDetailsPage({ params }: { params: { storyId: string
             <Image
               src={story.imageUrl}
               alt={story.title}
-              layout="fill"
-              objectFit="cover"
+              fill={true}
+              className="object-cover"
               data-ai-hint={story.imageHint}
             />
           </div>
@@ -85,3 +86,4 @@ export default function StoryDetailsPage({ params }: { params: { storyId: string
     </Container>
   );
 }
+

@@ -64,9 +64,8 @@ export default function CoursesPage() {
                 <Image
                   src={featuredCourse.thumbnailUrl}
                   alt={featuredCourse.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="group-hover:scale-105 transition-transform duration-300"
+                  fill={true}
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
                   data-ai-hint={featuredCourse.imageHint}
                 />
                 <Link 

@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -23,8 +24,8 @@ export function PortfolioItemCard({ title, creator, description, imageUrl, proje
           <Image
             src={imageUrl}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill={true}
+            className="object-cover"
             data-ai-hint={imageHint}
           />
         </div>
@@ -55,3 +56,4 @@ export function PortfolioItemCard({ title, creator, description, imageUrl, proje
     </Card>
   );
 }
+

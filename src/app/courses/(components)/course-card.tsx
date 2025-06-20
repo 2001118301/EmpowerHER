@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -26,8 +27,8 @@ export function CourseCard({ id, title, description, imageUrl, category, progres
           <Image
             src={imageUrl}
             alt={title}
-            layout="fill"
-            objectFit="cover"
+            fill={true}
+            className="object-cover"
             data-ai-hint={imageHint}
           />
         </div>
@@ -59,3 +60,4 @@ export function CourseCard({ id, title, description, imageUrl, category, progres
     </Card>
   );
 }
+
