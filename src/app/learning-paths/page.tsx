@@ -8,22 +8,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/co
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { GitFork, Lightbulb, TrendingUp, Loader2, Sparkles, AlertTriangle, BookOpen, Globe } from 'lucide-react';
+import { GitFork, Lightbulb, TrendingUp, Loader2, Sparkles, AlertTriangle, BookOpen, Globe, ExternalLink } from 'lucide-react';
 import BlurText from '@/components/shared/blur-text';
 import { suggestPersonalizedLearningPaths, type PersonalizedLearningPathsOutput } from '@/ai/flows/personalized-learning-paths';
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
-
-const MOCK_AVAILABLE_COURSES = `
-1. Introduction to Web Development: Learn HTML, CSS, JavaScript basics. Good for beginners interested in tech.
-2. Graphic Design Fundamentals: Explore principles of design, color theory, and typography using open-source tools like GIMP and Inkscape. Suitable for artistic individuals.
-3. Creative Writing Workshop: Develop storytelling skills, poetry, and scriptwriting. For those passionate about expression.
-4. Basic Entrepreneurship & Financial Literacy: Understand business planning, marketing, and managing personal finances. Essential for aspiring entrepreneurs.
-5. Digital Art with Krita: Learn to create digital paintings and illustrations. A great follow-up or alternative to Graphic Design Fundamentals.
-6. Community Leadership & Project Management: Skills for organizing local initiatives and managing small projects. For those wanting to make a difference.
-7. Advanced JavaScript & React: Deep dive into modern web development frameworks. For those with basic web dev knowledge.
-`;
 
 const interestsList = ['Technology', 'Creative Arts', 'Business & Entrepreneurship', 'Writing & Humanities', 'Social Impact', 'Personal Development'];
 const skillLevels = [
@@ -117,7 +107,6 @@ export default function LearningPathsPage() {
       try {
         const result = await suggestPersonalizedLearningPaths({
           userProfile: userProfile.trim(),
-          availableCourses: MOCK_AVAILABLE_COURSES,
         });
         setSuggestions(result);
       } catch (error) {
@@ -137,13 +126,13 @@ export default function LearningPathsPage() {
         <GitFork className="mx-auto h-16 w-16 text-primary mb-4" />
         <BlurText text="Design Your Learning Journey" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-          Answer a few questions, and our AI will help tailor a learning path for you from our available courses.
+          Answer a few questions, and our AI will help tailor a learning path for you using free external resources.
         </p>
       </div>
 
       <Card className="shadow-xl mb-12">
         <CardHeader>
-          <BlurText text="Curriculum Selector" className="text-2xl font-bold font-headline leading-none tracking-tight" />
+          <BlurText text="Your Profile for AI Suggestions" className="text-2xl font-bold font-headline leading-none tracking-tight" />
           <CardDescription>Select your interests, skill level, and goals to get personalized path suggestions.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-8">
@@ -231,33 +220,61 @@ export default function LearningPathsPage() {
       {suggestions && (
         <Card className="mt-12 shadow-xl">
           <CardHeader>
-            <BlurText text="Your AI-Powered Learning Path Suggestions" className="text-2xl font-bold font-headline text-primary" />
+            <BlurText text="Your AI-Powered Learning Path" className="text-2xl font-bold font-headline text-primary" />
           </CardHeader>
           <CardContent>
-            {suggestions.suggestedLearningPaths.length > 0 ? (
-              <>
-                <p className="text-muted-foreground mb-4">Based on your selections, here are some suggested learning paths from Empower Hub courses:</p>
-                <ul className="space-y-3 list-disc list-inside mb-6 bg-primary/5 p-4 rounded-md border border-primary/20">
-                  {suggestions.suggestedLearningPaths.map((path, index) => (
-                    <li key={index} className="text-md font-medium">{path}</li>
-                  ))}
-                </ul>
-                <Alert variant="default" className="bg-accent/10 border-accent/30">
-                  <Sparkles className="h-5 w-5 text-accent" />
-                  <BlurText text="AI Reasoning" className="font-semibold text-accent mb-1 leading-none tracking-tight" />
-                  <AlertDescription className="text-accent/90">
-                    {suggestions.reasoning}
-                  </AlertDescription>
-                </Alert>
-              </>
+            {suggestions.introduction && (
+              <p className="text-lg text-muted-foreground mb-6 text-center italic">
+                {suggestions.introduction}
+              </p>
+            )}
+
+            {suggestions.learningPlan && suggestions.learningPlan.length > 0 ? (
+              <div className="space-y-6">
+                {suggestions.learningPlan.map((step, index) => (
+                  <Card key={index} className="bg-card shadow-md border border-primary/10">
+                    <CardHeader>
+                      <div className="flex items-center gap-3">
+                        <span className="bg-primary text-primary-foreground rounded-full h-8 w-8 flex items-center justify-center text-sm font-bold">{index + 1}</span>
+                        <BlurText text={step.topic} className="text-xl font-semibold text-primary font-headline" />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <p className="text-muted-foreground">{step.description}</p>
+                      <div className="bg-muted/50 p-3 rounded-md border border-border mt-3">
+                        <p className="text-sm font-medium">
+                          Suggested Resource: <span className="font-normal">{step.suggestedResourceName}</span>
+                        </p>
+                        {step.suggestedResourceUrl ? (
+                          <Button asChild variant="link" className="p-0 h-auto text-accent hover:text-accent/80 font-medium mt-1">
+                            <a href={step.suggestedResourceUrl} target="_blank" rel="noopener noreferrer">
+                              Access Resource <ExternalLink size={14} className="ml-1" />
+                            </a>
+                          </Button>
+                        ) : step.notes ? (
+                          <p className="text-xs text-muted-foreground italic mt-1">Note: {step.notes}</p>
+                        ) : (
+                           <p className="text-xs text-muted-foreground italic mt-1">No direct link provided. Please search on the platform.</p>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             ) : (
               <Alert variant="default" className="border-yellow-500/50 bg-yellow-500/10 text-yellow-700">
                 <AlertTriangle className="h-5 w-5 text-yellow-600" />
-                 <BlurText text="No Specific Paths Found" className="font-semibold text-yellow-700 mb-1" />
+                <BlurText text="No Specific Learning Steps Generated" className="font-semibold text-yellow-700 mb-1" />
                 <AlertDescription>
-                  We couldn't find a perfect pre-defined path based on your selections. However, here's some general advice: {suggestions.reasoning} Consider exploring individual courses in our catalog!
+                  The AI couldn't generate specific learning steps for your current selection. You might want to try rephrasing your goals or interests.
                 </AlertDescription>
               </Alert>
+            )}
+
+            {suggestions.conclusion && (
+              <p className="text-lg text-muted-foreground mt-8 text-center italic">
+                {suggestions.conclusion}
+              </p>
             )}
           </CardContent>
         </Card>
@@ -299,5 +316,3 @@ export default function LearningPathsPage() {
     </Container>
   );
 }
-
-    
