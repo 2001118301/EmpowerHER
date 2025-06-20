@@ -36,8 +36,16 @@ export default function SuccessStoriesPage() {
       {successStoriesData.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {successStoriesData.map((story) => {
+            if (story.customDisplayHtml) {
+              return (
+                <div 
+                  key={story.id}
+                  dangerouslySetInnerHTML={{ __html: story.customDisplayHtml }} 
+                  className="flex justify-center" // Added to help center the custom HTML if its max-width is less than cell width
+                />
+              );
+            }
             if (story.type === 'video' && story.youtubeVideoId) {
-              // If it's a video with a specific youtubeVideoId, embed it
               return (
                 <div key={story.id} className="rounded-lg shadow-lg overflow-hidden bg-card flex flex-col">
                   <div className="aspect-video">
@@ -56,12 +64,10 @@ export default function SuccessStoriesPage() {
                   <div className="p-4 flex-grow flex flex-col">
                      <BlurText text={story.title} className="text-md font-semibold mb-1 font-headline line-clamp-2" />
                      <p className="text-xs text-muted-foreground line-clamp-2 flex-grow">{story.summary}</p>
-                     {/* You could add category tags or a link to a separate page here if needed */}
                   </div>
                 </div>
               );
             }
-            // For articles or videos that link out (no youtubeVideoId for direct embed)
             return <SuccessStoryCard key={story.id} story={story} />;
           })}
         </div>
@@ -85,3 +91,4 @@ export default function SuccessStoriesPage() {
     </Container>
   );
 }
+

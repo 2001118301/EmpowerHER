@@ -9,20 +9,21 @@ export interface SuccessStory {
   imageHint: string; 
   linkUrl: string; 
   youtubeVideoId?: string; 
-  categoryTags: string[]; 
+  categoryTags: string[];
+  customDisplayHtml?: string; // Added for custom HTML rendering
 }
 
 export const successStoriesData: SuccessStory[] = [
   {
     id: 'sylvia-chisangano',
     type: 'video',
-    title: 'Sylvia Chisangano: Zambia\'s Seed Entrepreneur', // Keeping original title, assuming the new video is still relevant
+    title: 'Sylvia Chisangano: Zambia\'s Seed Entrepreneur',
     name: 'Sylvia Chisangano',
-    summary: 'Discover how Sylvia became a successful seed entrepreneur in Zambia, transforming her community.', // Keeping original summary
-    imageUrl: 'https://i.ytimg.com/vi/nGsk6n0GnNs/hqdefault.jpg', // Thumbnail for the new video
+    summary: 'Discover how Sylvia became a successful seed entrepreneur in Zambia, transforming her community.',
+    imageUrl: 'https://i.ytimg.com/vi/nGsk6n0GnNs/hqdefault.jpg', 
     imageHint: 'woman farmer zambia',
-    linkUrl: 'https://www.youtube.com/watch?v=nGsk6n0GnNs', // Link to the new video
-    youtubeVideoId: 'nGsk6n0GnNs', // New video ID
+    linkUrl: 'https://www.youtube.com/watch?v=nGsk6n0GnNs', 
+    youtubeVideoId: 'nGsk6n0GnNs', 
     categoryTags: ['Entrepreneurship', 'Agriculture'],
   },
   {
@@ -31,10 +32,10 @@ export const successStoriesData: SuccessStory[] = [
     title: 'Asha Gond: Tribal Skateboarder & Changemaker',
     name: 'Asha Gond',
     summary: 'Asha Gond challenges norms and inspires her village in India through skateboarding.',
-    imageUrl: 'https://i.ytimg.com/vi/examplevideoId2/hqdefault.jpg', // Placeholder, ideally update if a specific video is chosen
+    imageUrl: 'https://i.ytimg.com/vi/examplevideoId2/hqdefault.jpg', 
     imageHint: 'girl skateboard india',
     linkUrl: 'https://www.youtube.com/results?search_query=Asha+Gond+skateboarder',
-    youtubeVideoId: 'examplevideoId2', // Placeholder, can be updated to embed
+    youtubeVideoId: 'examplevideoId2', 
     categoryTags: ['Personal Growth', 'Community', 'Sports'],
   },
   {
@@ -46,7 +47,7 @@ export const successStoriesData: SuccessStory[] = [
     imageUrl: 'https://i.ytimg.com/vi/Gr89BWDGt6g/hqdefault.jpg', 
     imageHint: 'women group community',
     linkUrl: 'https://www.youtube.com/watch?v=Gr89BWDGt6g',
-    youtubeVideoId: 'Gr89BWDGt6g', // Specific video ID for embedding
+    youtubeVideoId: 'Gr89BWDGt6g', 
     categoryTags: ['Inspiration', 'Community'],
   },
   {
@@ -54,11 +55,12 @@ export const successStoriesData: SuccessStory[] = [
     type: 'article',
     title: 'Muskan Ahirwar: The Young Librarian',
     name: 'Muskan Ahirwar',
-    summary: 'At just nine years old, Muskan started a community library for children in her slum in Bhopal, India.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    summary: "At just 9 years old, Muskan started a library in her slum to help other children discover the joy of reading. Her story of leadership and literacy has inspired the nation.",
+    imageUrl: 'https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/10/07/737093-muskan-ahirwar-100718.jpg',
     imageHint: 'girl reading library',
-    linkUrl: '#', // Placeholder for actual article link
+    linkUrl: 'https://www.bbc.com/news/world-asia-india-50952101',
     categoryTags: ['Education', 'Community', 'Leadership'],
+    customDisplayHtml: `<div style="max-width: 320px; padding: 16px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: #fff; font-family: sans-serif; margin: auto;">   <img src="https://cdn.dnaindia.com/sites/default/files/styles/full/public/2018/10/07/737093-muskan-ahirwar-100718.jpg" alt="Muskan Ahirwar - Young Librarian" style="width: 100%; border-radius: 8px;">   <h3 style="margin-top: 12px; font-size: 1.2em; color: #333;">Muskan Ahirwar: The Young Librarian</h3>   <p style="color: #555;">At just 9 years old, Muskan started a library in her slum to help other children discover the joy of reading. Her story of leadership and literacy has inspired the nation.</p>   <a href="https://www.bbc.com/news/world-asia-india-50952101" target="_blank" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background: #e91e63; color: #fff; text-decoration: none; border-radius: 8px;">Read Full Story</a> </div>`
   },
   {
     id: 'payal-jangid',
@@ -68,7 +70,7 @@ export const successStoriesData: SuccessStory[] = [
     summary: 'Payal escaped child marriage and became a global activist for children\'s rights in her village in Rajasthan, India.',
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'girl activist india',
-    linkUrl: '#', // Placeholder for actual article link
+    linkUrl: '#', 
     categoryTags: ['Activism', 'Personal Growth', 'Human Rights'],
   },
   {
@@ -79,7 +81,8 @@ export const successStoriesData: SuccessStory[] = [
     summary: 'Sister Zeph founded a school for girls in her courtyard in Pakistan, empowering them through education.',
     imageUrl: 'https://placehold.co/600x400.png',
     imageHint: 'woman teacher pakistan',
-    linkUrl: '#', // Placeholder for actual article link
+    linkUrl: '#', 
     categoryTags: ['Education', 'Leadership', 'Empowerment'],
   },
 ];
+
