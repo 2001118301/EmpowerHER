@@ -34,7 +34,7 @@ export default function HomePage() {
             <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg transition-transform hover:scale-105">
               <Link href="/courses">Explore Courses</Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="text-primary-foreground border-primary-foreground/50 hover:bg-primary-foreground/10 shadow-lg transition-transform hover:scale-105">
+            <Button size="lg" asChild className="shadow-lg transition-transform hover:scale-105">
               <Link href="/community">Join Community</Link>
             </Button>
           </div>
