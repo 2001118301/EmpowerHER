@@ -13,10 +13,14 @@ import { generateCourseInsights, type CourseInsightsOutput } from '@/ai/flows/ge
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Link from 'next/link';
-import { coursesData, type Course } from '@/lib/course-data'; // Updated import
+import { coursesData, type Course } from '@/lib/course-data';
 
-export default function CourseDetailsPage({ params: paramsPromise }: { params: Promise<{ courseId: string }> }) {
-  const params = use(paramsPromise);
+interface ResolvedCourseParams {
+  courseId: string;
+}
+
+export default function CourseDetailsPage({ params: paramsPromise }: { params: Promise<ResolvedCourseParams> }) {
+  const params: ResolvedCourseParams = use(paramsPromise);
   const course = coursesData.find(c => c.id === params.courseId);
 
   const [insights, setInsights] = useState<CourseInsightsOutput | null>(null);
