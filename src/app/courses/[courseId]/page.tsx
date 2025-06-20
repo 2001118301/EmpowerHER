@@ -1,5 +1,7 @@
+
 "use client";
 
+import { use } from 'react';
 import { Container } from '@/components/shared/container';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
@@ -16,7 +18,8 @@ const coursesData = [
 ];
 
 
-export default function CourseDetailsPage({ params }: { params: { courseId: string } }) {
+export default function CourseDetailsPage({ params: paramsPromise }: { params: Promise<{ courseId: string }> }) {
+  const params = use(paramsPromise);
   const course = coursesData.find(c => c.id === params.courseId);
 
   if (!course) {
