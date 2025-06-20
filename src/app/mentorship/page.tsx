@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Container } from '@/components/shared/container';
@@ -5,16 +6,36 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card'; // Removed CardTitle
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { MentorProfileCard } from './(components)/mentor-profile-card';
-import { Users, MessageCircle, UserPlus, Send, Paperclip, Smile } from 'lucide-react';
+import { Users, MessageCircle, UserPlus, Send, Paperclip, Smile, Lightbulb, Link as LinkIcon, Briefcase, Globe } from 'lucide-react';
 import Image from 'next/image';
 import BlurText from '@/components/shared/blur-text';
+import { Separator } from '@/components/ui/separator';
 
 const mentors = [
   { name: 'Aisha Khan', expertise: ['Web Development', 'JavaScript'], bio: 'Software engineer with 5+ years of experience, passionate about helping beginners.', imageUrl: 'https://placehold.co/100x100.png', imageHint: 'woman smiling professional' },
   { name: 'Ben Carter', expertise: ['Graphic Design', 'Branding'], bio: 'Freelance designer focused on visual identity and user experience design.', imageUrl: 'https://placehold.co/100x100.png', imageHint: 'man glasses friendly' },
   { name: 'Chloe Davis', expertise: ['Entrepreneurship', 'Marketing'], bio: 'Startup founder and marketing strategist, eager to share insights.', imageUrl: 'https://placehold.co/100x100.png', imageHint: 'woman confident business' },
+];
+
+const inspirationResources = [
+  {
+    id: 'ted-ed',
+    title: 'TED-Ed (Education)',
+    description: 'A library of short, beautifully animated educational videos on a vast range of subjects. Sparks curiosity and explains complex topics simply, broadening horizons and helping discover passions.',
+    url: 'https://ed.ted.com/',
+    icon: <Lightbulb size={20} className="text-primary" />,
+    category: 'Inspiration & Learning'
+  },
+  {
+    id: 'linkedin',
+    title: 'LinkedIn',
+    description: 'The world\'s largest professional network. Build a profile, connect with professionals in industries of interest, and follow companies. An essential tool for career visibility and networking.',
+    url: 'https://www.linkedin.com/',
+    icon: <Briefcase size={20} className="text-primary" />,
+    category: 'Professional Networking'
+  }
 ];
 
 export default function MentorshipPage() {
@@ -29,7 +50,7 @@ export default function MentorshipPage() {
       </div>
 
       {/* Mentor Profiles Section */}
-      <section className="mb-16">
+      <section className="mb-12">
         <BlurText text="Meet Our Mentors" className="text-3xl font-bold mb-8 text-center font-headline" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {mentors.map((mentor) => (
@@ -45,8 +66,10 @@ export default function MentorshipPage() {
         </div>
       </section>
 
+      <Separator className="my-12" />
+
       {/* Mentor Chat Placeholder Section */}
-      <section className="mb-16">
+      <section className="mb-12">
         <BlurText text="Mentor Chat" className="text-3xl font-bold mb-8 text-center font-headline" />
         <Card className="shadow-xl overflow-hidden">
           <CardHeader className="bg-primary text-primary-foreground">
@@ -118,6 +141,39 @@ export default function MentorshipPage() {
         </p>
       </section>
 
+      <Separator className="my-12" />
+      
+      {/* Inspirational Resources Section */}
+      <section className="mb-12">
+        <BlurText text="Career Inspiration & Networking" className="text-3xl font-bold mb-8 text-center font-headline" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {inspirationResources.map((resource) => (
+            <Card key={resource.id} className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  {resource.icon}
+                  <BlurText text={resource.title} className="text-xl font-semibold font-headline" />
+                </div>
+                <CardDescription className="text-xs text-muted-foreground pt-1">{resource.category}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground line-clamp-4">{resource.description}</p>
+              </CardContent>
+              <CardFooter className="border-t pt-4">
+                <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                  <a href={resource.url} target="_blank" rel="noopener noreferrer">
+                    Visit {resource.title}
+                    <LinkIcon size={16} className="ml-2" />
+                  </a>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <Separator className="my-12" />
+
       {/* Mentor Sign-up Section */}
       <section>
         <Card className="shadow-xl">
@@ -158,3 +214,5 @@ export default function MentorshipPage() {
     </Container>
   );
 }
+
+    

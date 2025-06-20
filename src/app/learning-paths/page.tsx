@@ -8,11 +8,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/co
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { GitFork, Lightbulb, TrendingUp, Loader2, Sparkles, AlertTriangle } from 'lucide-react';
+import { GitFork, Lightbulb, TrendingUp, Loader2, Sparkles, AlertTriangle, BookOpen, Globe } from 'lucide-react';
 import BlurText from '@/components/shared/blur-text';
 import { suggestPersonalizedLearningPaths, type PersonalizedLearningPathsOutput } from '@/ai/flows/personalized-learning-paths';
 import { useToast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Separator } from '@/components/ui/separator';
 
 const MOCK_AVAILABLE_COURSES = `
 1. Introduction to Web Development: Learn HTML, CSS, JavaScript basics. Good for beginners interested in tech.
@@ -31,6 +32,49 @@ const skillLevels = [
   { value: 'advanced', label: 'Advanced (Comfortable with core concepts)' }
 ];
 const learningGoalsList = ['Career Advancement', 'Personal Hobby / Interest', 'Start a Business', 'Skill Enhancement'];
+
+const externalLearningPlatforms = [
+  {
+    id: 'khan-academy',
+    title: 'Khan Academy',
+    description: 'A massive, completely free library of courses on math, science, economics, computing, arts, and humanities.',
+    url: 'https://www.khanacademy.org/',
+    category: 'Comprehensive Learning',
+    icon: <BookOpen size={20} className="text-primary" />,
+  },
+  {
+    id: 'freecodecamp',
+    title: 'freeCodeCamp',
+    description: 'Thousands of hours of free, project-based learning for coding and web development. Users earn verified certifications.',
+    url: 'https://www.freecodecamp.org/',
+    category: 'Web Development & Coding',
+    icon: <BookOpen size={20} className="text-primary" />,
+  },
+  {
+    id: 'google-digital-garage',
+    title: 'Google Digital Garage',
+    description: 'Free courses from Google on digital marketing, career development, and data.',
+    url: 'https://learndigital.withgoogle.com/digitalgarage/',
+    category: 'Digital Skills & Career',
+    icon: <BookOpen size={20} className="text-primary" />,
+  },
+  {
+    id: 'coursera-free',
+    title: 'Coursera (Free Courses)',
+    description: 'University-level courses from top institutions. Many courses can be audited for free.',
+    url: 'https://www.coursera.org/',
+    category: 'Higher Education',
+    icon: <BookOpen size={20} className="text-primary" />,
+  },
+  {
+    id: 'gcfglobal',
+    title: 'GCFGlobal',
+    description: 'Over 200 topics with free tutorials on essential life and tech skills.',
+    url: 'https://edu.gcfglobal.org/en/',
+    category: 'Essential Life & Tech Skills',
+    icon: <BookOpen size={20} className="text-primary" />,
+  },
+];
 
 export default function LearningPathsPage() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
@@ -97,7 +141,7 @@ export default function LearningPathsPage() {
         </p>
       </div>
 
-      <Card className="shadow-xl">
+      <Card className="shadow-xl mb-12">
         <CardHeader>
           <BlurText text="Curriculum Selector" className="text-2xl font-bold font-headline leading-none tracking-tight" />
           <CardDescription>Select your interests, skill level, and goals to get personalized path suggestions.</CardDescription>
@@ -166,8 +210,8 @@ export default function LearningPathsPage() {
               ))}
             </div>
           </div>
-
-          <CardFooter className="flex justify-end pt-6 border-t px-0">
+        </CardContent>
+        <CardFooter className="flex justify-end pt-6 border-t px-6">
             <Button size="lg" onClick={handleSubmit} disabled={isPending} className="bg-primary hover:bg-primary/90">
               {isPending ? (
                 <>
@@ -182,7 +226,6 @@ export default function LearningPathsPage() {
               )}
             </Button>
           </CardFooter>
-        </CardContent>
       </Card>
 
       {suggestions && (
@@ -193,7 +236,7 @@ export default function LearningPathsPage() {
           <CardContent>
             {suggestions.suggestedLearningPaths.length > 0 ? (
               <>
-                <p className="text-muted-foreground mb-4">Based on your selections, here are some suggested learning paths:</p>
+                <p className="text-muted-foreground mb-4">Based on your selections, here are some suggested learning paths from Empower Hub courses:</p>
                 <ul className="space-y-3 list-disc list-inside mb-6 bg-primary/5 p-4 rounded-md border border-primary/20">
                   {suggestions.suggestedLearningPaths.map((path, index) => (
                     <li key={index} className="text-md font-medium">{path}</li>
@@ -219,6 +262,42 @@ export default function LearningPathsPage() {
           </CardContent>
         </Card>
       )}
+
+      <Separator className="my-12" />
+
+      <div>
+        <BlurText text="Additional Free Learning Resources" className="text-3xl font-bold mb-8 text-center font-headline" />
+        <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
+          Supplement your learning path with these excellent free external resources.
+        </p>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {externalLearningPlatforms.map((platform) => (
+            <Card key={platform.id} className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  {platform.icon || <BookOpen size={24} className="text-primary" />}
+                  <BlurText text={platform.title} className="text-xl font-semibold font-headline" />
+                </div>
+                 <CardDescription className="text-xs text-muted-foreground pt-1">{platform.category}</CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-muted-foreground line-clamp-4">{platform.description}</p>
+              </CardContent>
+              <CardFooter className="border-t pt-4">
+                <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                  <a href={platform.url} target="_blank" rel="noopener noreferrer">
+                    Visit {platform.title}
+                    <Globe size={16} className="ml-2" />
+                  </a>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
+
     </Container>
   );
 }
+
+    
