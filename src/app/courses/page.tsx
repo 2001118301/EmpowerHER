@@ -27,7 +27,7 @@ export default function CoursesPage() {
     }
 
     if (searchTerm) {
-      courses = courses.filter(course => 
+      courses = courses.filter(course =>
         course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         course.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
@@ -38,7 +38,7 @@ export default function CoursesPage() {
   const handleTabChange = (value: string) => {
     setSelectedCategory(value as CourseCategory | 'All');
   };
-  
+
   const allTabCategories: { name: CourseCategory | 'All'; icon: any }[] = [
     { name: 'All', icon: Sparkles },
     ...courseCategories
@@ -49,9 +49,9 @@ export default function CoursesPage() {
     <>
       <div className="bg-gradient-to-r from-primary via-purple-500 to-accent text-primary-foreground py-6 text-center shadow-md">
         <Container>
-          <BlurText 
-            text="Start Your Learning Journey — Free Courses, Powerful Skills" 
-            className="text-2xl sm:text-3xl font-bold font-headline" 
+          <BlurText
+            text="Start Your Learning Journey — Free Courses, Powerful Skills"
+            className="text-2xl sm:text-3xl font-bold font-headline"
           />
         </Container>
       </div>
@@ -68,9 +68,9 @@ export default function CoursesPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   data-ai-hint={featuredCourse.imageHint}
                 />
-                <Link 
-                  href={`https://www.youtube.com/watch?v=${featuredCourse.youtubeVideoId}`} 
-                  target="_blank" 
+                <Link
+                  href={`https://www.youtube.com/watch?v=${featuredCourse.youtubeVideoId}`}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center"
                   aria-label={`Watch featured course: ${featuredCourse.title}`}
@@ -104,7 +104,7 @@ export default function CoursesPage() {
         <div className="mb-8">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <Input 
+            <Input
               type="search"
               placeholder="Search courses by title or topic..."
               className="w-full pl-10 pr-4 py-2 rounded-lg border-2 border-primary/30 focus:border-primary focus:ring-primary/50 transition-colors"
@@ -114,16 +114,16 @@ export default function CoursesPage() {
           </div>
            <p className="text-xs text-muted-foreground mt-1 text-center sm:text-left">Full search functionality with advanced filtering coming soon.</p>
         </div>
-        
+
         <Tabs value={selectedCategory} onValueChange={handleTabChange} className="w-full">
           <div className="flex justify-center mb-8">
             <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex lg:w-auto bg-card p-1.5 rounded-lg shadow-sm border border-primary/10 gap-1">
               {allTabCategories.map(cat => {
                 const CategoryIcon = cat.icon;
                 return (
-                  <TabsTrigger 
-                    key={cat.name} 
-                    value={cat.name} 
+                  <TabsTrigger
+                    key={cat.name}
+                    value={cat.name}
                     className="flex-1 lg:flex-initial data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md px-3 py-1.5 text-xs sm:text-sm rounded-md"
                   >
                     <CategoryIcon size={16} className="mr-1.5 hidden sm:inline-block" />
@@ -133,7 +133,7 @@ export default function CoursesPage() {
               })}
             </TabsList>
           </div>
-          
+
           <TabsContent value={selectedCategory} className="mt-0"> {/* Use selectedCategory directly for the active tab's content */}
             <div className="text-center mb-6">
                <BlurText text={selectedCategory === 'All' ? "All Courses" : `Courses in ${selectedCategory}`} className="text-2xl font-semibold font-headline text-primary" />
@@ -156,5 +156,3 @@ export default function CoursesPage() {
     </>
   );
 }
-
-    

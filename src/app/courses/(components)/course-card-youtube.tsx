@@ -63,5 +63,3 @@ export function CourseCardYoutube({ course }: CourseCardYoutubeProps) {
     </Card>
   );
 }
-
-    

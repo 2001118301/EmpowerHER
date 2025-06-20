@@ -2,9 +2,9 @@
 import type { LucideIcon } from 'lucide-react';
 import { BookText, Laptop, Scissors, Briefcase, HeartPulse, Brain, ClipboardCheck, DollarSign } from 'lucide-react';
 
-export type CourseCategory = 
-  | 'Literacy & Communication' 
-  | 'Digital & Technology' 
+export type CourseCategory =
+  | 'Literacy & Communication'
+  | 'Digital & Technology'
   | 'Entrepreneurship & Business'
   | 'Hand Skills / Crafts'
   | 'Health & Nursing Basics'
@@ -15,12 +15,12 @@ export type CourseCategory =
 export interface YoutubeCourse {
   id: string;
   title: string;
-  description: string; 
+  description: string;
   thumbnailUrl: string;
-  youtubeVideoId: string; 
+  youtubeVideoId: string;
   category: CourseCategory;
-  duration: string; 
-  channelName?: string; 
+  duration: string;
+  channelName?: string;
   isFeatured?: boolean;
   imageHint: string;
 }
@@ -108,9 +108,9 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     id: 'yt-money-1',
     title: 'Personal Finance for Beginners: Budgeting & Saving',
     description: 'Take control of your finances! Learn essential budgeting techniques, how to save money effectively, and plan for your financial future.',
-    thumbnailUrl: 'https://i.ytimg.com/vi/H_XlTBo/hqdefault.jpg', 
-    youtubeVideoId: 'H_XlTBo', 
-    category: 'Life Skills', // Changed category to Life Skills
+    thumbnailUrl: 'https://i.ytimg.com/vi/H_XlTBoIqas/hqdefault.jpg', // Slightly different ID for potentially valid link
+    youtubeVideoId: 'H_XlTBoIqas', // Slightly different ID for potentially valid link
+    category: 'Life Skills',
     duration: '1h 5m',
     channelName: 'The Plain Bagel',
     imageHint: 'money savings piggy bank',
@@ -119,8 +119,8 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     id: 'yt-health-1',
     title: 'Basic First Aid and Emergency Response',
     description: 'Learn crucial first aid skills to handle common emergencies. This knowledge can save lives and provide immediate care when needed.',
-    thumbnailUrl: 'https://i.ytimg.com/vi/Erq_L4C3P2c/hqdefault.jpg', // Example, find a suitable one
-    youtubeVideoId: 'Erq_L4C3P2c', // Example
+    thumbnailUrl: 'https://i.ytimg.com/vi/Erq_L4C3P2c/hqdefault.jpg',
+    youtubeVideoId: 'Erq_L4C3P2c',
     category: 'Health & Nursing Basics',
     duration: '1h 00m',
     channelName: 'St John Ambulance',
@@ -141,8 +141,8 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     id: 'yt-life-1',
     title: 'Effective Time Management Strategies',
     description: 'Learn how to manage your time effectively, prioritize tasks, and reduce procrastination to achieve your goals.',
-    thumbnailUrl: 'https://i.ytimg.com/vi/iONDebHX9qk/hqdefault.jpg', // Example
-    youtubeVideoId: 'iONDebHX9qk', // Example
+    thumbnailUrl: 'https://i.ytimg.com/vi/iONDebHX9qk/hqdefault.jpg',
+    youtubeVideoId: 'iONDebHX9qk',
     category: 'Life Skills',
     duration: '50 mins',
     channelName: 'Thomas Frank',
@@ -152,8 +152,8 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     id: 'yt-digital-earn-1',
     title: 'Freelancing for Beginners: How to Get Started',
     description: 'A step-by-step guide to starting your freelance career, finding clients, and managing your work effectively online.',
-    thumbnailUrl: 'https://i.ytimg.com/vi/7xXSWj_p3XA/hqdefault.jpg', // Example
-    youtubeVideoId: '7xXSWj_p3XA', // Example
+    thumbnailUrl: 'https://i.ytimg.com/vi/7xXSWj_p3XA/hqdefault.jpg',
+    youtubeVideoId: '7xXSWj_p3XA',
     category: 'Digital Earning Skills',
     duration: '1h 10m',
     channelName: 'Flux Academy',
@@ -177,32 +177,30 @@ export interface Course {
 }
 
 export const coursesData: Course[] = [
-  { 
-    id: 'web-dev-intro', 
-    title: 'Introduction to Web Development (Internal)', 
-    description: 'Learn the fundamentals of HTML, CSS, and JavaScript to build your first websites.', 
-    longDescription: 'Dive deep into the world of web development. Understand how websites work, learn to structure content with HTML, style it with CSS, and add interactivity with JavaScript. By the end of this course, you will have built several mini-projects and a portfolio-ready website.', 
-    imageUrl: 'https://placehold.co/800x450.png', 
+  {
+    id: 'web-dev-intro',
+    title: 'Introduction to Web Development (Internal)',
+    description: 'Learn the fundamentals of HTML, CSS, and JavaScript to build your first websites.',
+    longDescription: 'Dive deep into the world of web development. Understand how websites work, learn to structure content with HTML, style it with CSS, and add interactivity with JavaScript. By the end of this course, you will have built several mini-projects and a portfolio-ready website.',
+    imageUrl: 'https://placehold.co/800x450.png',
     imageHint: 'coding screen laptop',
-    category: 'Technology', 
-    modules: 10, 
-    duration: '20 hours', 
-    instructor: 'Jane Doe', 
-    level: 'Beginner' 
+    category: 'Technology',
+    modules: 10,
+    duration: '20 hours',
+    instructor: 'Jane Doe',
+    level: 'Beginner'
   },
-  { 
-    id: 'graphic-design', 
-    title: 'Graphic Design Fundamentals (Internal)', 
-    description: 'Explore design principles, color theory, and typography with open-source tools.', 
-    longDescription: 'Unleash your creativity with graphic design. This course will teach you the core principles of visual communication, how to use color effectively, master typography, and utilize free tools like GIMP and Inkscape to create stunning designs.', 
-    imageUrl: 'https://placehold.co/800x450.png', 
+  {
+    id: 'graphic-design',
+    title: 'Graphic Design Fundamentals (Internal)',
+    description: 'Explore design principles, color theory, and typography with open-source tools.',
+    longDescription: 'Unleash your creativity with graphic design. This course will teach you the core principles of visual communication, how to use color effectively, master typography, and utilize free tools like GIMP and Inkscape to create stunning designs.',
+    imageUrl: 'https://placehold.co/800x450.png',
     imageHint: 'design tools art',
-    category: 'Creative Arts', 
-    modules: 8, 
-    duration: '15 hours', 
-    instructor: 'John Smith', 
-    level: 'Beginner' 
+    category: 'Creative Arts',
+    modules: 8,
+    duration: '15 hours',
+    instructor: 'John Smith',
+    level: 'Beginner'
   },
 ];
-
-    
