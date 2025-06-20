@@ -23,7 +23,7 @@ export default function HomePage() {
             className="absolute z-0 w-full h-full object-cover opacity-20"
             src="https://cdn.pixabay.com/video/2021/09/19/89066-613200185_tiny.mp4"
           />
-           <div className="absolute inset-0 bg-black/30"></div>
+           <div className="absolute inset-0 bg-black/50"></div>
         </div>
         <Container className="relative z-10 text-center">
           <BlurText text="Welcome to Empower Hub" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline" />
