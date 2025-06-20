@@ -18,7 +18,7 @@ export default function HomePage() {
             muted
             playsInline
             className="absolute z-0 w-full h-full object-cover opacity-20"
-            src="https://cdn.pixabay.com/video/2024/02/21/200427-915424777_tiny.mp4"
+            src="https://cdn.pixabay.com/video/2021/09/19/89066-613200185_tiny.mp4"
           />
            <div className="absolute inset-0 bg-black/50"></div>
         </div>
@@ -43,7 +43,7 @@ export default function HomePage() {
         <div className="text-center mb-12 py-12"> {/* Added py-12 for some spacing */}
           <BlurText text="Our Mission" className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary" />
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Empower Hub is dedicated to providing accessible education, mentorship, and resources to help individuals achieve their goals and build a brighter future for themselves and their communities.
+            EmpowerHER is dedicated to unlocking the potential of rural girls through education, mentorship, and opportunity.  Our mission is to ensure every girl, regardless of where she lives, has the chance to learn, grow, and shape her own future with confidence and independence.
           </p>
         </div>
       </Container>
