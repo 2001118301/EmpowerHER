@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from '@/components/ui/button';
@@ -22,7 +23,7 @@ export default function HomePage() {
            <div className="absolute inset-0 bg-black/50"></div>
         </div>
         <Container className="relative z-10 text-center">
-          <BlurText text="Welcome to Empower Hub" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline" />
+          <BlurText text="Welcome to EmpowerHER" className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl font-headline" />
           <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-primary-foreground/90">
             Unlocking potential, fostering creativity, and building futures. Join our community to learn, grow, and make an impact.
           </p>

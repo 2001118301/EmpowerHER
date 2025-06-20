@@ -5,7 +5,7 @@ import { Footer } from '@/app/(components)/footer';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Empower Hub',
+  title: 'EmpowerHER',
   description: 'Empowering communities through learning and connection.',
 };
 
