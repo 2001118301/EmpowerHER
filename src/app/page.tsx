@@ -21,7 +21,7 @@ export default function HomePage() {
             muted
             playsInline
             className="absolute z-0 w-full h-full object-cover opacity-20"
-            src="https://cdn.pixabay.com/video/2024/07/04/215472-972166684_large.mp4"
+            src="https://cdn.pixabay.com/video/2021/09/19/89066-613200185_tiny.mp4"
           />
            <div className="absolute inset-0 bg-black/30"></div>
         </div>
