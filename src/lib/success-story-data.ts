@@ -16,13 +16,13 @@ export const successStoriesData: SuccessStory[] = [
   {
     id: 'sylvia-chisangano',
     type: 'video',
-    title: 'Sylvia Chisangano: Zambia\'s Seed Entrepreneur',
+    title: 'Sylvia Chisangano: Zambia\'s Seed Entrepreneur', // Keeping original title, assuming the new video is still relevant
     name: 'Sylvia Chisangano',
-    summary: 'Discover how Sylvia became a successful seed entrepreneur in Zambia, transforming her community.',
-    imageUrl: 'https://i.ytimg.com/vi/examplevideoId1/hqdefault.jpg', // Replace with actual or better placeholder
+    summary: 'Discover how Sylvia became a successful seed entrepreneur in Zambia, transforming her community.', // Keeping original summary
+    imageUrl: 'https://i.ytimg.com/vi/nGsk6n0GnNs/hqdefault.jpg', // Thumbnail for the new video
     imageHint: 'woman farmer zambia',
-    linkUrl: 'https://www.youtube.com/results?search_query=Sylvia+Chisangano+Zambia+seed+entrepreneur',
-    youtubeVideoId: 'examplevideoId1', // Placeholder
+    linkUrl: 'https://www.youtube.com/watch?v=nGsk6n0GnNs', // Link to the new video
+    youtubeVideoId: 'nGsk6n0GnNs', // New video ID
     categoryTags: ['Entrepreneurship', 'Agriculture'],
   },
   {
@@ -31,10 +31,10 @@ export const successStoriesData: SuccessStory[] = [
     title: 'Asha Gond: Tribal Skateboarder & Changemaker',
     name: 'Asha Gond',
     summary: 'Asha Gond challenges norms and inspires her village in India through skateboarding.',
-    imageUrl: 'https://i.ytimg.com/vi/examplevideoId2/hqdefault.jpg', // Replace with actual or better placeholder
+    imageUrl: 'https://i.ytimg.com/vi/examplevideoId2/hqdefault.jpg', // Placeholder, ideally update if a specific video is chosen
     imageHint: 'girl skateboard india',
     linkUrl: 'https://www.youtube.com/results?search_query=Asha+Gond+skateboarder',
-    youtubeVideoId: 'examplevideoId2', // Placeholder
+    youtubeVideoId: 'examplevideoId2', // Placeholder, can be updated to embed
     categoryTags: ['Personal Growth', 'Community', 'Sports'],
   },
   {
@@ -43,10 +43,10 @@ export const successStoriesData: SuccessStory[] = [
     title: 'Empowering Rural Women: Stories of Strength',
     name: 'Various',
     summary: 'A compilation of inspiring stories showcasing the strength and hope of empowered rural women.',
-    imageUrl: 'https://i.ytimg.com/vi/examplevideoId3/hqdefault.jpg', // Replace with actual or better placeholder
+    imageUrl: 'https://i.ytimg.com/vi/Gr89BWDGt6g/hqdefault.jpg', 
     imageHint: 'women group community',
-    linkUrl: 'https://www.youtube.com/results?search_query=empowering+rural+women+stories+of+strength+and+hope',
-    youtubeVideoId: 'examplevideoId3', // Placeholder
+    linkUrl: 'https://www.youtube.com/watch?v=Gr89BWDGt6g',
+    youtubeVideoId: 'Gr89BWDGt6g', // Specific video ID for embedding
     categoryTags: ['Inspiration', 'Community'],
   },
   {

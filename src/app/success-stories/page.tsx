@@ -36,30 +36,32 @@ export default function SuccessStoriesPage() {
       {successStoriesData.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {successStoriesData.map((story) => {
-            if (story.id === 'empowering-rural-women-video') {
+            if (story.type === 'video' && story.youtubeVideoId) {
+              // If it's a video with a specific youtubeVideoId, embed it
               return (
-                <div key={story.id} className="rounded-lg shadow-lg overflow-hidden bg-card">
+                <div key={story.id} className="rounded-lg shadow-lg overflow-hidden bg-card flex flex-col">
                   <div className="aspect-video">
                     <iframe
                       width="100%"
                       height="100%"
-                      src="https://www.youtube.com/embed/Gr89BWDGt6g?si=XMESk2CQEh1fsYbF"
+                      src={`https://www.youtube.com/embed/${story.youtubeVideoId}`}
                       title={story.title}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       referrerPolicy="strict-origin-when-cross-origin"
                       allowFullScreen
-                      className="bg-muted" // Background for loading state
+                      className="bg-muted" 
                     ></iframe>
                   </div>
-                  {/* Optional: Add a title or brief summary below if desired, similar to a card */}
-                  <div className="p-4">
+                  <div className="p-4 flex-grow flex flex-col">
                      <BlurText text={story.title} className="text-md font-semibold mb-1 font-headline line-clamp-2" />
-                     <p className="text-xs text-muted-foreground line-clamp-2">{story.summary}</p>
+                     <p className="text-xs text-muted-foreground line-clamp-2 flex-grow">{story.summary}</p>
+                     {/* You could add category tags or a link to a separate page here if needed */}
                   </div>
                 </div>
               );
             }
+            // For articles or videos that link out (no youtubeVideoId for direct embed)
             return <SuccessStoryCard key={story.id} story={story} />;
           })}
         </div>
