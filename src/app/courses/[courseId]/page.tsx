@@ -7,20 +7,13 @@ import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { BookOpenText, CheckCircle, Clock, Lightbulb, ListChecks, ArrowLeft, AlertTriangle, Loader2, Rocket } from 'lucide-react';
+import { BookOpenText, CheckCircle, Clock, Lightbulb, ListChecks, ArrowLeft, Loader2, Rocket } from 'lucide-react';
 import BlurText from '@/components/shared/blur-text';
 import { generateCourseInsights, type CourseInsightsOutput } from '@/ai/flows/generate-course-insights-flow';
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import Link from 'next/link';
-
-// Mock course data, in a real app this would come from a DB
-const coursesData = [
-  { id: 'web-dev-intro', title: 'Introduction to Web Development', description: 'Learn the fundamentals of HTML, CSS, and JavaScript to build your first websites. This course covers everything from basic syntax to creating interactive web pages.', imageUrl: 'https://placehold.co/800x450.png', category: 'Technology', modules: 10, duration: '20 hours', imageHint: 'coding screen laptop', longDescription: 'Dive deep into the world of web development. Understand how websites work, learn to structure content with HTML, style it with CSS, and add interactivity with JavaScript. By the end of this course, you will have built several mini-projects and a portfolio-ready website.', instructor: 'Jane Doe', level: 'Beginner' },
-  { id: 'graphic-design', title: 'Graphic Design Fundamentals', description: 'Explore design principles, color theory, and typography with open-source tools.', imageUrl: 'https://placehold.co/800x450.png', category: 'Creative Arts', modules: 8, duration: '15 hours', imageHint: 'design tools art', longDescription: 'Unleash your creativity with graphic design. This course will teach you the core principles of visual communication, how to use color effectively, master typography, and utilize free tools like GIMP and Inkscape to create stunning designs.', instructor: 'John Smith', level: 'Beginner' },
-  // Add more courses here following the same structure
-];
-
+import { coursesData, type Course } from '@/lib/course-data'; // Updated import
 
 export default function CourseDetailsPage({ params: paramsPromise }: { params: Promise<{ courseId: string }> }) {
   const params = use(paramsPromise);
@@ -164,10 +157,12 @@ export default function CourseDetailsPage({ params: paramsPromise }: { params: P
                   <span className="text-muted-foreground flex items-center gap-2"><CheckCircle size={16}/> Level:</span>
                   <span className="font-medium">{course.level}</span>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground">Instructor:</span>
-                  <span className="font-medium">{course.instructor}</span>
-                </div>
+                {course.instructor && (
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Instructor:</span>
+                    <span className="font-medium">{course.instructor}</span>
+                  </div>
+                )}
                 <div className="mt-4">
                   <p className="text-sm text-muted-foreground mb-1">Your Progress:</p>
                   <Progress value={30} aria-label="Course progress" className="h-3 mb-1" />
@@ -185,8 +180,9 @@ export default function CourseDetailsPage({ params: paramsPromise }: { params: P
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-sm">
-                  <li><a href="#" className="text-primary hover:underline">Advanced {course.category}</a></li>
-                  <li><a href="#" className="text-primary hover:underline">{course.category} for Business</a></li>
+                  {/* This could be dynamically populated in a real app */}
+                  <li><Link href="#" className="text-primary hover:underline">Advanced {course.category}</Link></li>
+                  <li><Link href="#" className="text-primary hover:underline">{course.category} for Business</Link></li>
                 </ul>
               </CardContent>
             </Card>
