@@ -21,7 +21,7 @@ export default function HomePage() {
             muted
             playsInline
             className="absolute z-0 w-full h-full object-cover opacity-20"
-            src="https://cdn.pixabay.com/video/2024/03/01/202587-918431513_large.mp4"
+            src="https://cdn.pixabay.com/video/2023/10/01/188710-870624000_large.mp4"
           />
            <div className="absolute inset-0 bg-black/30"></div>
         </div>
@@ -34,7 +34,7 @@ export default function HomePage() {
             <Button size="lg" asChild className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg transition-transform hover:scale-105">
               <Link href="/courses">Explore Courses</Link>
             </Button>
-            <Button size="lg" asChild className="shadow-lg transition-transform hover:scale-105">
+            <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg transition-transform hover:scale-105">
               <Link href="/community">Join Community</Link>
             </Button>
           </div>
