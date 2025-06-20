@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Youtube, CheckCircle, Clock } from 'lucide-react';
+import { Youtube, CheckCircle, Clock, ExternalLink } from 'lucide-react';
 import BlurText from '@/components/shared/blur-text';
 import type { YoutubeCourse } from '@/lib/course-data';
 
@@ -14,12 +14,16 @@ interface CourseCardYoutubeProps {
 }
 
 export function CourseCardYoutube({ course }: CourseCardYoutubeProps) {
-  const youtubeLink = `https://www.youtube.com/watch?v=${course.youtubeVideoId}`;
+  const courseLink = course.youtubeVideoId
+    ? `https://www.youtube.com/watch?v=${course.youtubeVideoId}`
+    : course.externalUrl || '#';
+
+  const isYouTubeLink = !!course.youtubeVideoId || (course.externalUrl && course.externalUrl.includes('youtube.com'));
 
   return (
     <Card className="flex flex-col h-full overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg bg-card/80 backdrop-blur-sm border-primary/20">
       <CardHeader className="p-0">
-        <Link href={youtubeLink} target="_blank" rel="noopener noreferrer" aria-label={`Watch ${course.title} on YouTube`}>
+        <Link href={courseLink} target="_blank" rel="noopener noreferrer" aria-label={`Learn more about ${course.title}`}>
           <div className="aspect-video relative group">
             <Image
               src={course.thumbnailUrl}
@@ -29,7 +33,11 @@ export function CourseCardYoutube({ course }: CourseCardYoutubeProps) {
               data-ai-hint={course.imageHint}
             />
             <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-              <Youtube size={48} className="text-white/80 group-hover:text-white transition-opacity duration-300" />
+              {isYouTubeLink ? (
+                <Youtube size={48} className="text-white/80 group-hover:text-white transition-opacity duration-300" />
+              ) : (
+                <ExternalLink size={48} className="text-white/80 group-hover:text-white transition-opacity duration-300" />
+              )}
             </div>
           </div>
         </Link>
@@ -47,8 +55,8 @@ export function CourseCardYoutube({ course }: CourseCardYoutubeProps) {
       </CardContent>
       <CardFooter className="p-4 md:p-5 border-t border-primary/10 flex flex-col sm:flex-row items-center gap-2">
         <Button asChild className="w-full sm:w-auto flex-grow bg-primary hover:bg-primary/90 text-primary-foreground">
-          <Link href={youtubeLink} target="_blank" rel="noopener noreferrer">
-            <Youtube size={16} className="mr-2" />
+          <Link href={courseLink} target="_blank" rel="noopener noreferrer">
+            {isYouTubeLink ? <Youtube size={16} className="mr-2" /> : <ExternalLink size={16} className="mr-2" />}
             Start Learning
           </Link>
         </Button>
