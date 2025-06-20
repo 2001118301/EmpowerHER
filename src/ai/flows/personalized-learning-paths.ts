@@ -25,7 +25,7 @@ const LearningStepSchema = z.object({
   topic: z.string().describe("The learning topic or skill area."),
   description: z.string().describe("A brief description of what to learn for this topic."),
   suggestedResourceName: z.string().describe("Name of the suggested free online resource (e.g., Khan Academy, freeCodeCamp)."),
-  suggestedResourceUrl: z.string().url().optional().describe("A direct URL to the suggested course or resource, if available."),
+  suggestedResourceUrl: z.string().optional().describe("A direct URL to the suggested course or resource, if available. Must be a valid URL string."),
   notes: z.string().optional().describe("Additional notes or search terms if a direct URL isn't available (e.g., 'Search for 'Beginner Python' on this platform').")
 });
 
@@ -68,7 +68,7 @@ For each step in the learning plan:
 1. Define a clear 'topic' or skill.
 2. Provide a brief 'description' of what the user will learn or do.
 3. Suggest a 'suggestedResourceName' (e.g., "Khan Academy's Intro to HTML/CSS").
-4. If you know a direct 'suggestedResourceUrl' to a specific free course or module on that platform, provide it.
+4. If you know a direct 'suggestedResourceUrl' to a specific free course or module on that platform, provide it. It must be a valid URL string.
 5. If a direct URL is not feasible or known, provide 'notes' on how to find it (e.g., "Search for 'JavaScript Basics' on freeCodeCamp").
 6. Ensure the plan is progressive and logical.
 
