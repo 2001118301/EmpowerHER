@@ -1,6 +1,6 @@
 
 import type { LucideIcon } from 'lucide-react';
-import { BookText, Laptop, Scissors, Briefcase, HeartPulse, Brain, ClipboardCheck, DollarSign } from 'lucide-react';
+import { BookText, Laptop, Scissors, Briefcase, HeartPulse, Brain, ClipboardCheck, DollarSign, Sparkles, Leaf, Compass, Globe } from 'lucide-react';
 
 export type CourseCategory =
   | 'Literacy & Communication'
@@ -25,16 +25,18 @@ export interface YoutubeCourse {
   imageHint: string;
 }
 
-export const courseCategories: { name: CourseCategory; icon: LucideIcon }[] = [
+export const courseCategories: { name: CourseCategory | 'All'; icon: LucideIcon }[] = [
+  { name: 'All', icon: Sparkles },
   { name: 'Literacy & Communication', icon: BookText },
   { name: 'Digital & Technology', icon: Laptop },
   { name: 'Entrepreneurship & Business', icon: Briefcase },
   { name: 'Hand Skills / Crafts', icon: Scissors },
   { name: 'Health & Nursing Basics', icon: HeartPulse },
-  { name: 'Personal Growth', icon: Brain },
-  { name: 'Life Skills', icon: ClipboardCheck },
-  { name: 'Digital Earning Skills', icon: DollarSign },
+  { name: 'Personal Growth', icon: Leaf },
+  { name: 'Life Skills', icon: Compass },
+  { name: 'Digital Earning Skills', icon: Globe },
 ];
+
 
 export const youtubeCoursesData: YoutubeCourse[] = [
   {
@@ -108,9 +110,9 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     id: 'yt-money-1',
     title: 'Personal Finance for Beginners: Budgeting & Saving',
     description: 'Take control of your finances! Learn essential budgeting techniques, how to save money effectively, and plan for your financial future.',
-    thumbnailUrl: 'https://i.ytimg.com/vi/H_XlTBoIqas/hqdefault.jpg', // Slightly different ID for potentially valid link
-    youtubeVideoId: 'H_XlTBoIqas', // Slightly different ID for potentially valid link
-    category: 'Life Skills',
+    thumbnailUrl: 'https://i.ytimg.com/vi/H_XlTBoIqas/hqdefault.jpg',
+    youtubeVideoId: 'H_XlTBoIqas',
+    category: 'Life Skills', // Was Money & Business, changed to Life Skills as per new categories
     duration: '1h 5m',
     channelName: 'The Plain Bagel',
     imageHint: 'money savings piggy bank',
@@ -158,6 +160,28 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     duration: '1h 10m',
     channelName: 'Flux Academy',
     imageHint: 'laptop working freelance',
+  },
+  {
+    id: 'yt-digital-earn-2',
+    title: 'Social Media Marketing Tutorial for Beginners',
+    description: 'Understand the basics of social media marketing, creating engaging content, and growing an online presence for a brand or yourself.',
+    thumbnailUrl: 'https://i.ytimg.com/vi/q4_h822M4B0/hqdefault.jpg',
+    youtubeVideoId: 'q4_h822M4B0',
+    category: 'Digital Earning Skills',
+    duration: '2h 30m',
+    channelName: 'HubSpot Academy',
+    imageHint: 'social media icons phone'
+  },
+   {
+    id: 'yt-crafts-2',
+    title: 'Beginner Sewing Projects: Easy Tote Bag',
+    description: 'Learn basic sewing machine skills by creating a simple and useful tote bag. Great for beginners!',
+    thumbnailUrl: 'https://i.ytimg.com/vi/S_2e1kG6k48/hqdefault.jpg',
+    youtubeVideoId: 'S_2e1kG6k48',
+    category: 'Hand Skills / Crafts',
+    duration: '35 mins',
+    channelName: 'Made Everyday',
+    imageHint: 'sewing machine fabric'
   },
 ];
 
