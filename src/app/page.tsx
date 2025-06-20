@@ -3,11 +3,11 @@
 
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/shared/container';
-import { Card, CardContent, CardHeader } from '@/components/ui/card'; // Removed CardTitle
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { MapPin, Users, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import BlurText from '@/components/shared/blur-text';
-import Image from 'next/image'; // Still needed for the impact map placeholder
+import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -21,7 +21,7 @@ export default function HomePage() {
             muted
             playsInline
             className="absolute z-0 w-full h-full object-cover opacity-20"
-            src="https://cdn.pixabay.com/video/2024/03/01/202587-918431513_large.mp4"
+            src="https://cdn.pixabay.com/video/2024/07/04/215472-972166684_large.mp4"
           />
            <div className="absolute inset-0 bg-black/30"></div>
         </div>
