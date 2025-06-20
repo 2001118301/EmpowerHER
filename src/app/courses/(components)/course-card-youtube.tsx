@@ -37,6 +37,7 @@ export function CourseCardYoutube({ course }: CourseCardYoutubeProps) {
       </CardHeader>
       <CardContent className="flex-grow p-4 md:p-5">
         <BlurText text={course.title} className="text-md md:text-lg font-semibold mb-2 font-headline line-clamp-2" />
+        <p className="text-xs text-muted-foreground mb-3 line-clamp-3">{course.description}</p>
         {course.channelName && (
           <p className="text-xs text-muted-foreground mb-1">By: {course.channelName}</p>
         )}
@@ -58,8 +59,10 @@ export function CourseCardYoutube({ course }: CourseCardYoutubeProps) {
         </Button>
       </CardFooter>
       <p className="px-4 pb-2 text-center text-[10px] text-muted-foreground opacity-70">
-          (Progress tracking coming soon)
+          (Progress tracking via Firebase Auth/Firestore coming soon)
       </p>
     </Card>
   );
 }
+
+    
