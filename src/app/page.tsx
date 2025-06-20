@@ -1,26 +1,27 @@
+
 "use client";
 
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/shared/container';
 import { Card, CardContent, CardHeader } from '@/components/ui/card'; // Removed CardTitle
 import { MapPin, Users, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import BlurText from '@/components/shared/blur-text';
+import Image from 'next/image'; // Still needed for the impact map placeholder
 
 export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
       <div className="relative bg-gradient-to-br from-primary via-purple-500 to-accent text-primary-foreground py-20 md:py-32">
-        <div className="absolute inset-0">
-          <Image
-            src="https://placehold.co/1920x1080.png"
-            alt="Empowering community"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-20"
-            data-ai-hint="community empowerment abstract"
+        <div className="absolute inset-0 overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute z-0 w-full h-full object-cover opacity-20"
+            src="https://cdn.pixabay.com/video/2024/03/01/202587-918431513_large.mp4"
           />
            <div className="absolute inset-0 bg-black/30"></div>
         </div>
