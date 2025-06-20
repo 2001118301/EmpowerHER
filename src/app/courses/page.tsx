@@ -1,136 +1,263 @@
 
 "use client";
 
+import { useState, useTransition } from 'react';
 import { Container } from '@/components/shared/container';
-import { CourseCard } from './(components)/course-card';
-import { PersonalizedLearningForm } from './(components)/personalized-learning-form';
-import { Separator } from '@/components/ui/separator';
-import BlurText from '@/components/shared/blur-text';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Globe, BookOpen } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Loader2, Sparkles, Lightbulb, TrendingUp, Target, BookOpen, ExternalLink, AlertTriangle, Send } from 'lucide-react';
+import BlurText from '@/components/shared/blur-text';
+import { suggestPersonalizedLearningPaths, type PersonalizedLearningPathsOutput } from '@/ai/flows/personalized-learning-paths';
+import { useToast } from "@/hooks/use-toast";
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
-const courses = [
-  { id: 'web-dev-intro', title: 'Introduction to Web Development', description: 'Learn the fundamentals of HTML, CSS, and JavaScript to build your first websites.', imageUrl: 'https://placehold.co/600x400.png', category: 'Technology', progress: 25, imageHint: 'laptop code' },
-  { id: 'graphic-design', title: 'Graphic Design Fundamentals', description: 'Explore design principles, color theory, and typography with open-source tools.', imageUrl: 'https://placehold.co/600x400.png', category: 'Creative Arts', imageHint: 'design tools palette' },
-  { id: 'creative-writing', title: 'Creative Writing Workshop', description: 'Develop your storytelling skills and learn to craft compelling narratives and poetry.', imageUrl: 'https://placehold.co/600x400.png', category: 'Arts & Humanities', imageHint: 'notebook pen' },
-  { id: 'entrepreneurship', title: 'Basic Entrepreneurship', description: 'Understand business planning, marketing strategies, and financial literacy for startups.', imageUrl: 'https://placehold.co/600x400.png', category: 'Business', progress: 0, imageHint: 'business plan growth' },
-  { id: 'digital-art', title: 'Digital Art with Krita', description: 'Master Krita for creating stunning digital paintings and illustrations from scratch.', imageUrl: 'https://placehold.co/600x400.png', category: 'Creative Arts', imageHint: 'digital tablet art' },
-  { id: 'community-leadership', title: 'Community Leadership', description: 'Learn to lead projects, inspire teams, and make a positive impact in your community.', imageUrl: 'https://placehold.co/600x400.png', category: 'Social Impact', progress: 70, imageHint: 'community meeting people' },
+const interestsList = ['Technology & Coding', 'Creative Arts & Design', 'Business & Entrepreneurship', 'Writing & Humanities', 'Social Impact & Community', 'Personal Development & Well-being'];
+const skillLevels = [
+  { value: 'beginner', label: 'Beginner (Just starting out, little to no experience)' },
+  { value: 'intermediate', label: 'Intermediate (Some foundational knowledge or experience)' },
+  { value: 'advanced', label: 'Advanced (Comfortable with core concepts, looking to deepen expertise)' }
 ];
+const learningGoalsList = ['Learn a new hobby', 'Advance my career / Get a job', 'Start my own business/project', 'Improve specific skills', 'Explore new fields'];
 
-const externalLearningPlatforms = [
-  {
-    id: 'khan-academy',
-    title: 'Khan Academy',
-    description: 'A massive, completely free library of courses on math, science, economics, computing, arts, and humanities. Includes videos, practice exercises, and progress tracking.',
-    url: 'https://www.khanacademy.org/',
-    category: 'Comprehensive Learning',
-    icon: <BookOpen size={20} className="text-primary" />,
-  },
-  {
-    id: 'freecodecamp',
-    title: 'freeCodeCamp',
-    description: 'Thousands of hours of free, project-based learning for coding and web development. Users earn verified certifications.',
-    url: 'https://www.freecodecamp.org/',
-    category: 'Web Development & Coding',
-    icon: <BookOpen size={20} className="text-primary" />,
-  },
-  {
-    id: 'google-digital-garage',
-    title: 'Google Digital Garage',
-    description: 'Free courses from Google on digital marketing, career development, and data. Many courses include a free, shareable certificate.',
-    url: 'https://learndigital.withgoogle.com/digitalgarage/',
-    category: 'Digital Skills & Career',
-    icon: <BookOpen size={20} className="text-primary" />,
-  },
-  {
-    id: 'coursera-free',
-    title: 'Coursera (Free Courses)',
-    description: 'University-level courses from top institutions. Many courses can be audited for free (look for the "Audit" option).',
-    url: 'https://www.coursera.org/',
-    category: 'Higher Education',
-    icon: <BookOpen size={20} className="text-primary" />,
-  },
-  {
-    id: 'gcfglobal',
-    title: 'GCFGlobal',
-    description: 'Over 200 topics with free tutorials on essential life and tech skills—from using a computer to online safety, creativity, and financial literacy.',
-    url: 'https://edu.gcfglobal.org/en/',
-    category: 'Essential Life & Tech Skills',
-    icon: <BookOpen size={20} className="text-primary" />,
-  },
-];
-
+type Step = "interests" | "skills" | "goals" | "plan";
 
 export default function CoursesPage() {
+  const [currentStep, setCurrentStep] = useState<Step>("interests");
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [selectedSkillLevel, setSelectedSkillLevel] = useState<string>('beginner');
+  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
+  
+  const [isPending, startTransition] = useTransition();
+  const [plan, setPlan] = useState<PersonalizedLearningPathsOutput | null>(null);
+  const { toast } = useToast();
+
+  const handleInterestChange = (interest: string) => {
+    setSelectedInterests(prev => 
+      prev.includes(interest) ? prev.filter(i => i !== interest) : [...prev, interest]
+    );
+  };
+
+  const handleGoalChange = (goal: string) => {
+    setSelectedGoals(prev =>
+      prev.includes(goal) ? prev.filter(g => g !== goal) : [...prev, goal]
+    );
+  };
+
+  const validateAndProceed = (nextStep: Step) => {
+    if (currentStep === "interests" && selectedInterests.length === 0) {
+      toast({ variant: "destructive", title: "Selection Required", description: "Please select at least one interest to continue." });
+      return;
+    }
+    if (currentStep === "goals" && selectedGoals.length === 0) {
+      toast({ variant: "destructive", title: "Selection Required", description: "Please select at least one learning goal." });
+      return;
+    }
+    setCurrentStep(nextStep);
+  };
+
+  const handleSubmit = () => {
+    if (selectedInterests.length === 0 || selectedGoals.length === 0) {
+      toast({ variant: "destructive", title: "Selections Missing", description: "Please ensure you've selected interests and goals." });
+      return;
+    }
+
+    setPlan(null);
+    startTransition(async () => {
+      const userProfile = `
+        Interests: ${selectedInterests.join(', ')}.
+        Current Skill Level: ${skillLevels.find(sl => sl.value === selectedSkillLevel)?.label || selectedSkillLevel}.
+        Learning Goals: ${selectedGoals.join(', ')}.
+      `;
+      try {
+        const result = await suggestPersonalizedLearningPaths({
+          userProfile: userProfile.trim(),
+        });
+        setPlan(result);
+        setCurrentStep("plan");
+      } catch (error) {
+        console.error("Error fetching personalized learning plan:", error);
+        toast({
+          variant: "destructive",
+          title: "AI Error",
+          description: "Could not generate your learning plan. Please try again later.",
+        });
+      }
+    });
+  };
+
+  const renderStepContent = () => {
+    switch (currentStep) {
+      case "interests":
+        return (
+          <CardContent className="space-y-6">
+            <div className="text-xl font-semibold mb-1 flex items-center gap-2 text-primary">
+              <Lightbulb /> <BlurText text="What piques your interest?" />
+            </div>
+            <p className="text-muted-foreground mb-4">Select all areas you're curious about or want to explore. This helps us find the best starting points for you.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {interestsList.map(interest => (
+                <div key={interest} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-accent/10 transition-colors cursor-pointer has-[:checked]:bg-accent/20 has-[:checked]:border-accent" onClick={() => handleInterestChange(interest)}>
+                  <Checkbox 
+                    id={`interest-${interest.toLowerCase().replace(/\s&/g, '-').replace(/\s/g, '-')}`} 
+                    onCheckedChange={() => handleInterestChange(interest)} // Keep for accessibility if direct click fails
+                    checked={selectedInterests.includes(interest)}
+                    className="h-5 w-5"
+                  />
+                  <Label htmlFor={`interest-${interest.toLowerCase().replace(/\s&/g, '-').replace(/\s/g, '-')}`} className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer">
+                    {interest}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        );
+      case "skills":
+        return (
+          <CardContent className="space-y-6">
+            <div className="text-xl font-semibold mb-1 flex items-center gap-2 text-primary">
+              <TrendingUp /> <BlurText text="What's your current experience level?" />
+            </div>
+            <p className="text-muted-foreground mb-4">Honest self-assessment helps us tailor the difficulty and depth of suggestions.</p>
+            <RadioGroup 
+              value={selectedSkillLevel} 
+              onValueChange={setSelectedSkillLevel} 
+              className="space-y-3"
+            >
+              {skillLevels.map(option => (
+                <Label key={option.value} htmlFor={`skill-${option.value}`} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-accent/10 transition-colors cursor-pointer has-[:checked]:bg-accent/20 has-[:checked]:border-accent">
+                  <RadioGroupItem value={option.value} id={`skill-${option.value}`} className="h-5 w-5" />
+                  <span>{option.label}</span>
+                </Label>
+              ))}
+            </RadioGroup>
+          </CardContent>
+        );
+      case "goals":
+        return (
+          <CardContent className="space-y-6">
+            <div className="text-xl font-semibold mb-1 flex items-center gap-2 text-primary">
+              <Target /> <BlurText text="What are your learning goals?" />
+            </div>
+            <p className="text-muted-foreground mb-4">What do you hope to achieve with new skills or knowledge? Select all that apply.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {learningGoalsList.map(goal => (
+                <div key={goal} className="flex items-center space-x-3 p-3 border rounded-lg hover:bg-accent/10 transition-colors cursor-pointer has-[:checked]:bg-accent/20 has-[:checked]:border-accent" onClick={() => handleGoalChange(goal)}>
+                  <Checkbox 
+                    id={`goal-${goal.toLowerCase().replace(/\s/g, '-')}`} 
+                    onCheckedChange={() => handleGoalChange(goal)}
+                    checked={selectedGoals.includes(goal)}
+                    className="h-5 w-5"
+                  />
+                  <Label htmlFor={`goal-${goal.toLowerCase().replace(/\s/g, '-')}`} className="text-sm font-medium cursor-pointer">
+                    {goal}
+                  </Label>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        );
+      default: return null;
+    }
+  };
+
   return (
     <Container>
       <div className="text-center mb-12">
-        <BlurText text="Our Courses" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
+        <Sparkles className="mx-auto h-16 w-16 text-primary mb-4" />
+        <BlurText text="Craft Your Personalized Learning Adventure!" className="text-4xl font-bold tracking-tight sm:text-5xl font-headline text-primary" />
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-          Browse our diverse range of courses designed to equip you with valuable skills.
+          Answer a few simple questions, and our AI will chart a unique learning path for you using the best free online resources.
         </p>
       </div>
 
-      <div className="mb-16">
-        <PersonalizedLearningForm />
-      </div>
-      
-      <Separator className="my-12" />
+      {currentStep !== "plan" && (
+        <Card className="shadow-xl mb-12 border-2 border-primary/20">
+          <CardHeader>
+            <BlurText text="Let's Get Started" className="text-2xl font-bold font-headline" />
+            <CardDescription>Help us understand your needs so we can create the perfect plan.</CardDescription>
+          </CardHeader>
+          {renderStepContent()}
+          <CardFooter className="flex justify-between pt-6 border-t">
+            {currentStep !== "interests" && (
+              <Button variant="outline" onClick={() => setCurrentStep(currentStep === "skills" ? "interests" : "skills")}>
+                Back
+              </Button>
+            )}
+            {currentStep === "interests" && <div />} 
+            
+            {currentStep !== "goals" ? (
+              <Button onClick={() => validateAndProceed(currentStep === "interests" ? "skills" : "goals")} className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                Next
+              </Button>
+            ) : (
+              <Button onClick={handleSubmit} disabled={isPending} className="bg-primary hover:bg-primary/90">
+                {isPending ? (
+                  <> <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Generating Plan... </>
+                ) : (
+                  <> <Send className="mr-2 h-5 w-5" /> Create My Plan </>
+                )}
+              </Button>
+            )}
+          </CardFooter>
+        </Card>
+      )}
 
-      <div>
-        <BlurText text="Explore All Empower Hub Courses" className="text-3xl font-bold mb-8 text-center font-headline" />
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-          {courses.map((course) => (
-            <CourseCard
-              key={course.id}
-              id={course.id}
-              title={course.title}
-              description={course.description}
-              imageUrl={course.imageUrl}
-              category={course.category}
-              progress={course.progress}
-              imageHint={course.imageHint}
-            />
-          ))}
+      {isPending && currentStep === "plan" && (
+         <div className="text-center py-10">
+            <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary mb-4" />
+            <BlurText text="Our AI is crafting your personalized learning plan..." className="text-xl font-semibold text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">This might take a few moments.</p>
         </div>
-      </div>
+      )}
 
-      <Separator className="my-12" />
-
-      <div>
-        <BlurText text="Discover More Learning Opportunities" className="text-3xl font-bold mb-8 text-center font-headline" />
-        <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Expand your knowledge with these highly-rated free learning platforms from around the web.
-        </p>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {externalLearningPlatforms.map((platform) => (
-            <Card key={platform.id} className="flex flex-col h-full shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  {platform.icon || <BookOpen size={24} className="text-primary" />}
-                  <BlurText text={platform.title} className="text-xl font-semibold font-headline" />
+      {plan && currentStep === "plan" && (
+        <Card className="shadow-xl border-2 border-accent/30">
+          <CardHeader className="bg-accent/10">
+            <BlurText text="Your Personalized Learning Plan!" className="text-2xl font-bold font-headline text-accent" />
+            <CardDescription>{plan.introduction}</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6 pt-6">
+            {plan.learningPlan.length > 0 ? (
+              plan.learningPlan.map((step, index) => (
+                <div key={index} className="p-4 border rounded-lg bg-background/50">
+                  <BlurText text={`Step ${index + 1}: ${step.topic}`} className="text-xl font-semibold mb-2 text-primary" />
+                  <p className="text-muted-foreground mb-3">{step.description}</p>
+                  <div className="flex items-center gap-2 text-sm font-medium mb-1">
+                    <BookOpen size={18} className="text-accent" />
+                    <span>Suggested Resource: {step.suggestedResourceName}</span>
+                  </div>
+                  {step.suggestedResourceUrl ? (
+                    <Button variant="link" asChild className="px-0 h-auto text-primary hover:text-accent">
+                      <a href={step.suggestedResourceUrl} target="_blank" rel="noopener noreferrer">
+                        Go to Resource <ExternalLink size={14} className="ml-1" />
+                      </a>
+                    </Button>
+                  ) : step.notes ? (
+                    <p className="text-xs text-muted-foreground italic">{step.notes}</p>
+                  ) : <p className="text-xs text-muted-foreground italic">No specific link provided, try searching on the platform.</p>}
                 </div>
-                 <CardDescription className="text-xs text-muted-foreground pt-1">{platform.category}</CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-sm text-muted-foreground line-clamp-4">{platform.description}</p>
-              </CardContent>
-              <CardFooter className="border-t pt-4">
-                <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                  <a href={platform.url} target="_blank" rel="noopener noreferrer">
-                    Visit {platform.title}
-                    <Globe size={16} className="ml-2" />
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </div>
+              ))
+            ) : (
+              <Alert variant="default" className="border-yellow-500/50 bg-yellow-500/10 text-yellow-700">
+                <AlertTriangle className="h-5 w-5 text-yellow-600" />
+                <AlertTitle>Plan Under Construction</AlertTitle>
+                <AlertDescription>
+                  The AI is still thinking or couldn't generate specific steps right now. Try adjusting your selections or check back later!
+                </AlertDescription>
+              </Alert>
+            )}
+            <p className="text-center text-muted-foreground pt-4 border-t">{plan.conclusion}</p>
+          </CardContent>
+          <CardFooter className="flex justify-center">
+             <Button variant="outline" onClick={() => { setCurrentStep("interests"); setPlan(null); }} className="bg-primary/10 hover:bg-primary/20 text-primary border-primary">
+                Start Over / Refine Plan
+              </Button>
+          </CardFooter>
+        </Card>
+      )}
     </Container>
   );
 }
-
-    
