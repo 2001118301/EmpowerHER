@@ -14,13 +14,11 @@ import {
   HeartHandshake,
   LayoutDashboard,
   Menu,
-  Siren,
   UserCircle,
-  Globe,
   Settings,
   LogOut,
-  Award, // For Success Stories
-  Gift,  // For Donate
+  Award, 
+  Gift,  
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -99,25 +97,6 @@ export function Header() {
               Donate
             </Link>
           </Button>
-           <Button variant="destructive" size="sm" asChild className="hidden sm:flex items-center gap-1.5">
-            <Link href="/emergency">
-              <Siren size={16} />
-              Emergency
-            </Link>
-          </Button>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" className="h-9 w-9">
-                <Globe size={18} />
-                <span className="sr-only">Select Language</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>English</DropdownMenuItem>
-              <DropdownMenuItem disabled>Local Language (Coming Soon)</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -166,12 +145,6 @@ export function Header() {
                     <Link href="/donate">
                       <Gift size={20} />
                       Donate Now
-                    </Link>
-                  </Button>
-                   <Button variant="destructive" size="sm" asChild className="flex items-center gap-1.5 mt-2 w-full text-base py-3">
-                    <Link href="/emergency">
-                      <Siren size={20} />
-                      Emergency Help
                     </Link>
                   </Button>
                 </nav>
