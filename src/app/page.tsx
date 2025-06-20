@@ -3,11 +3,8 @@
 
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/shared/container';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { MapPin, Users, BarChart3 } from 'lucide-react';
 import Link from 'next/link';
 import BlurText from '@/components/shared/blur-text';
-import Image from 'next/image';
 
 export default function HomePage() {
   return (
@@ -21,7 +18,7 @@ export default function HomePage() {
             muted
             playsInline
             className="absolute z-0 w-full h-full object-cover opacity-20"
-            src="https://cdn.pixabay.com/video/2021/09/19/89066-613200185_tiny.mp4"
+            src="https://cdn.pixabay.com/video/2024/02/21/200427-915424777_tiny.mp4"
           />
            <div className="absolute inset-0 bg-black/50"></div>
         </div>
@@ -43,7 +40,7 @@ export default function HomePage() {
 
       {/* Introduction Section */}
       <Container>
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 py-12"> {/* Added py-12 for some spacing */}
           <BlurText text="Our Mission" className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary" />
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
             Empower Hub is dedicated to providing accessible education, mentorship, and resources to help individuals achieve their goals and build a brighter future for themselves and their communities.
@@ -51,24 +48,6 @@ export default function HomePage() {
         </div>
       </Container>
       
-      {/* Impact Map Placeholder */}
-      <Container>
-         <Card className="shadow-lg">
-          <CardHeader>
-            <BlurText text="Our Global Impact" className="text-2xl font-bold text-center text-primary font-headline leading-none tracking-tight" />
-          </CardHeader>
-          <CardContent className="aspect-video bg-gray-200 rounded-md flex items-center justify-center">
-             <Image 
-                src="https://placehold.co/800x450.png" 
-                alt="Impact Map Placeholder" 
-                width={800} 
-                height={450} 
-                className="rounded-md object-cover"
-                data-ai-hint="world map connections"
-              />
-          </CardContent>
-        </Card>
-      </Container>
     </>
   );
 }
