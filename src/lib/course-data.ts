@@ -223,17 +223,6 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     imageHint: 'sewing machine fabric',
   },
   {
-    id: 'hnd-craft-2',
-    title: 'Basics of Sewing (Alison)',
-    description: 'A free structured course on the basics of sewing, offered by Alison.',
-    thumbnailUrl: 'https://placehold.co/600x400.png',
-    externalUrl: 'https://www.alison.com',
-    category: 'Hand Skills / Crafts',
-    duration: 'Varies',
-    channelName: 'Alison',
-    imageHint: 'online sewing course',
-  },
-  {
     id: 'hnd-craft-3',
     title: 'Learn Sewing for Free – Arkdefo',
     description: 'Free resources and courses for learning sewing from Arkdefo.',

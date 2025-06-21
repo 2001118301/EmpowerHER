@@ -198,6 +198,13 @@ export default function CoursesPage() {
                   <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>English Speaking Course – Day 1</h3>
                   <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>Start with easy daily English speaking practice for beginners.</p>
                 </div>
+                 {/* Card 4: Alison Sewing Course */}
+                 <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
+                  <img src="https://cdn.alison.com/course/intro/2111/alison-courseware-basics-of-sewing.jpg" alt="Basics of Sewing Course" style={{width: '100%', borderRadius: '8px', height: '162px', objectFit: 'cover'}}/>
+                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>Basics of Sewing (Alison)</h3>
+                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>A free structured course on the basics of sewing, offered by Alison.</p>
+                  <a href="https://alison.com/course/basics-of-sewing" target="_blank" rel="noopener noreferrer" style={{display: 'block', marginTop: '10px', padding: '10px', backgroundColor: '#0a9396', color: 'white', textAlign: 'center', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold'}}>Start Course</a>
+                </div>
               </div>
             </section>
           )}
