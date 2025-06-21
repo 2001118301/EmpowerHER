@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from '@/components/ui/button';
@@ -39,14 +40,13 @@ export default function HomePage() {
 
       {/* Introduction Section */}
       <Container>
-        <div className="text-center mb-12 py-12">
-          <BlurText text="Our Mission" className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary" />
-          <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            EmpowerHER is dedicated to unlocking the potential of rural girls through education, mentorship, and opportunity.
-          </p>
-          <p className="mt-2 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Our mission is to ensure every girl, regardless of where she lives, has the chance to learn, grow, and shape her own future with confidence and independence.
-          </p>
+        <div className="text-center py-12">
+            <div className="max-w-4xl mx-auto bg-accent text-accent-foreground p-8 md:p-12 rounded-xl shadow-lg">
+                <BlurText text="Our Mission" className="text-3xl font-bold tracking-tight sm:text-4xl font-headline mb-6" />
+                <p className="text-lg sm:text-xl leading-relaxed italic">
+                    "EmpowerHER is dedicated to unlocking the potential of rural girls through education, mentorship, and opportunity, ensuring every girl, regardless of where she lives, has the chance to learn, grow, and shape her own future with confidence and independence."
+                </p>
+            </div>
         </div>
       </Container>
       
