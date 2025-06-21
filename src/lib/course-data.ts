@@ -41,17 +41,6 @@ export const courseCategories: { name: CourseCategory | 'All'; icon: LucideIcon 
 export const youtubeCoursesData: YoutubeCourse[] = [
   // Literacy & Communication
   {
-    id: 'lit-comm-0',
-    title: 'English Speaking Course',
-    description: 'General resources for English speaking courses available on YouTube.',
-    thumbnailUrl: 'https://placehold.co/600x400.png?text=English+Speaking',
-    externalUrl: 'https://www.youtube.com/results?search_query=English+Speaking+Courses',
-    category: 'Literacy & Communication',
-    duration: 'Varies',
-    channelName: 'YouTube',
-    imageHint: 'speaking communication',
-  },
-  {
     id: 'lit-comm-2',
     title: 'Free Spoken English Tips Playlist',
     description: 'A collection of tips and lessons for improving spoken English, via YouTube playlists.',
