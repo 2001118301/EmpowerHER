@@ -73,29 +73,34 @@ export function Header() {
   );
 
 
+  const Logo = ({ className }: { className?: string }) => (
+    <svg
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={cn("text-primary", className)}
+    >
+      <path d="M8.5 7.5L6.5 4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M12 6L12 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M15.5 7.5L17.5 4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M17.5 11L20.5 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M17.5 15L20.5 16" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M6.5 11L3.5 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path d="M6.5 15L3.5 16" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+      <path 
+        d="M8.5 10.5 C 7.5 9.5, 7 10, 7 11 V 21 H 17 V 14 C 17 12, 16 11, 15 11 C 14.5 11, 14 11.2, 13.5 11.5 L 10.5 8 C 10 7.5, 9.5 7.5, 9 8 C 8.5 8.5, 8.5 9, 9 9.5 L 11.5 12.5 C 10.5 12, 9.5 11.5, 8.5 10.5 Z"
+      />
+      <path
+        d="M17 14.5 C 18.5 14.5, 19.5 15.5, 19.5 16.5 C 19.5 17.5, 18.5 18.5, 17 18.5 C 16 18.5, 15.5 17.5, 16 16.5 C 16.2 16, 17 14.5, 17 14.5 Z"
+      />
+    </svg>
+  );
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-card shadow-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8"
-          >
-            <defs>
-              <linearGradient id="logoGradientDesktop" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--accent))" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" />
-              </linearGradient>
-            </defs>
-            <path d="M22 17.5C22 19.9853 17.5228 22 12 22C6.47715 22 2 19.9853 2 17.5C2 15.0147 6.47715 13 12 13C17.5228 13 22 15.0147 22 17.5Z" stroke="url(#logoGradientDesktop)" strokeWidth="1.5"/>
-            <path d="M12 13V11C12 8.23858 14.2386 6 17 6H17.5C18.8807 6 20 4.88071 20 3.5V3" stroke="url(#logoGradientDesktop)" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M12 13V11C12 8.23858 9.76142 6 7 6H6.5C5.11929 6 4 4.88071 4 3.5V3" stroke="url(#logoGradientDesktop)" strokeWidth="1.5" strokeLinecap="round"/>
-            <path d="M17.5 8C17.5 9.10457 16.6046 10 15.5 10C14.3954 10 13.5 9.10457 13.5 8C13.5 6.89543 14.3954 6 15.5 6C16.6046 6 17.5 6.89543 17.5 8Z" fill="url(#logoGradientDesktop)"/>
-            <path d="M8.5 8C8.5 9.10457 7.60457 10 6.5 10C5.39543 10 4.5 9.10457 4.5 8C4.5 6.89543 5.39543 6 6.5 6C7.60457 6 8.5 6.89543 8.5 8Z" fill="url(#logoGradientDesktop)"/>
-            <path d="M12.5 5C12.5 5.82843 11.8284 6.5 11 6.5C10.1716 6.5 9.5 5.82843 9.5 5C9.5 4.17157 10.1716 3.5 11 3.5C11.8284 3.5 12.5 4.17157 12.5 5Z" fill="url(#logoGradientDesktop)"/>
-          </svg>
+          <Logo className="h-8 w-8" />
           <BlurText text="EmpowerHER" className="text-xl font-bold text-primary font-headline" />
         </Link>
 
@@ -146,26 +151,8 @@ export function Header() {
               <SheetContent side="right" className="w-[280px] p-4 pt-8 bg-card">
                 <div className="mb-6 flex items-center justify-between">
                     <Link href="/" className="flex items-center gap-2">
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-7 w-7"
-                        >
-                          <defs>
-                            <linearGradient id="logoGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                              <stop offset="0%" stopColor="hsl(var(--accent))" />
-                              <stop offset="100%" stopColor="hsl(var(--primary))" />
-                            </linearGradient>
-                          </defs>
-                          <path d="M22 17.5C22 19.9853 17.5228 22 12 22C6.47715 22 2 19.9853 2 17.5C2 15.0147 6.47715 13 12 13C17.5228 13 22 15.0147 22 17.5Z" stroke="url(#logoGradientMobile)" strokeWidth="1.5"/>
-                          <path d="M12 13V11C12 8.23858 14.2386 6 17 6H17.5C18.8807 6 20 4.88071 20 3.5V3" stroke="url(#logoGradientMobile)" strokeWidth="1.5" strokeLinecap="round"/>
-                          <path d="M12 13V11C12 8.23858 9.76142 6 7 6H6.5C5.11929 6 4 4.88071 4 3.5V3" stroke="url(#logoGradientMobile)" strokeWidth="1.5" strokeLinecap="round"/>
-                          <path d="M17.5 8C17.5 9.10457 16.6046 10 15.5 10C14.3954 10 13.5 9.10457 13.5 8C13.5 6.89543 14.3954 6 15.5 6C16.6046 6 17.5 6.89543 17.5 8Z" fill="url(#logoGradientMobile)"/>
-                          <path d="M8.5 8C8.5 9.10457 7.60457 10 6.5 10C5.39543 10 4.5 9.10457 4.5 8C4.5 6.89543 5.39543 6 6.5 6C7.60457 6 8.5 6.89543 8.5 8Z" fill="url(#logoGradientMobile)"/>
-                          <path d="M12.5 5C12.5 5.82843 11.8284 6.5 11 6.5C10.1716 6.5 9.5 5.82843 9.5 5C9.5 4.17157 10.1716 3.5 11 3.5C11.8284 3.5 12.5 4.17157 12.5 5Z" fill="url(#logoGradientMobile)"/>
-                        </svg>
-                        <BlurText text="EmpowerHER" className="text-lg font-bold text-primary font-headline" />
+                      <Logo className="h-7 w-7" />
+                      <BlurText text="EmpowerHER" className="text-lg font-bold text-primary font-headline" />
                     </Link>
                 </div>
                 <nav className="flex flex-col gap-2">
