@@ -18,7 +18,8 @@ import {
   Settings,
   LogOut,
   Award, 
-  Gift,  
+  Gift,
+  Briefcase,  
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -35,6 +36,7 @@ const navLinks: NavLinkItem[] = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/courses', label: 'Courses', icon: BookOpen },
   { href: '/learning-paths', label: 'Learning Paths', icon: GitFork },
+  { href: '/opportunities', label: 'Opportunities', icon: Briefcase },
   { href: '/mentorship', label: 'Mentorship', icon: Users },
   { href: '/showcase', label: 'Showcase', icon: GalleryHorizontalEnd },
   { href: '/community', label: 'Community', icon: HeartHandshake },
