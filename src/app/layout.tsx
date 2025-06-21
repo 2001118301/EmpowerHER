@@ -7,9 +7,6 @@ import { Toaster } from "@/components/ui/toaster";
 export const metadata: Metadata = {
   title: 'EmpowerHER',
   description: 'Empowering communities through learning and connection.',
-  icons: {
-    icon: 'https://ik.imagekit.io/rmlbayysp/1750519855470-ChatGPT_Image_Jun_21__2025__11_23_41_PM-removebg-preview_bWCGGUBkC.png',
-  },
 };
 
 export default function RootLayout({
