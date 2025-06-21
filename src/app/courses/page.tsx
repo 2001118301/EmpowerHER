@@ -169,14 +169,18 @@ export default function CoursesPage() {
               </div>
               <div className="flex flex-wrap justify-center items-start gap-6">
                 {/* Card 1: Replaced YouTube Video */}
-                <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
-                  <iframe width="100%" height="162" style={{borderRadius: '8px', border: 'none'}}
-                    src="https://www.youtube.com/embed/YJXUOJKtn8o"
+                <div style={{maxWidth: '320px', background: '#fff', borderRadius: '16px', boxShadow: '0 4px 14px rgba(0,0,0,0.08)', padding: '16px', fontFamily: 'sans-serif', margin: 'auto'}}>
+                  <iframe width="100%" height="180"
+                    src="https://www.youtube.com/embed/K0NBS3JX2pA"
                     title="How to Communicate Clearly and Concisely"
+                    frameBorder="0"
+                    style={{borderRadius: '12px', border: 'none'}}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
                   </iframe>
-                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>How to Communicate Clearly and Concisely</h3>
-                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>A free mini-training on clear and concise communication, available on YouTube.</p>
+                  <h3 style={{marginTop: '12px', fontSize: '1.1em', color: '#222'}}>How to Communicate Clearly and Concisely</h3>
+                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>
+                    A free mini-training on clear and confident communication, available on YouTube.
+                  </p>
                 </div>
                 {/* Card 2: YouTube */}
                 <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
