@@ -26,6 +26,7 @@ const opportunitiesData = [
     location: 'Global (Online)',
     description: 'A full-tuition scholarship for women pursuing a bachelor\'s degree in computer science or related tech fields.',
     tags: ['Tech', 'Bachelors', 'Full-Tuition'],
+    url: '#',
   },
   {
     id: 'intern-1',
@@ -36,6 +37,7 @@ const opportunitiesData = [
     location: 'Remote',
     description: 'Assist in developing and maintaining web applications for non-profit organizations. A great learning opportunity for aspiring developers.',
     tags: ['Web Development', 'React', 'Non-Profit'],
+    url: '#',
   },
   {
     id: 'scholar-2',
@@ -47,6 +49,7 @@ const opportunitiesData = [
     location: 'Varies by University',
     description: 'A grant program to support exceptional women pursuing a Master\'s degree in public policy or international relations.',
     tags: ['Leadership', 'Masters', 'Grant'],
+    url: '#',
   },
   {
     id: 'intern-2',
@@ -57,6 +60,7 @@ const opportunitiesData = [
     location: 'Remote',
     description: 'Create impactful visual content for social good campaigns. Your design skills can make a real difference.',
     tags: ['Graphic Design', 'Social Media', 'Canva'],
+    url: '#',
   },
   {
     id: 'scholar-3',
@@ -68,6 +72,7 @@ const opportunitiesData = [
     location: 'National',
     description: 'Financial assistance for young women enrolling in a foundation year program for a STEM-related degree.',
     tags: ['STEM', 'Foundation', 'Bursary'],
+    url: '#',
   },
    {
     id: 'intern-3',
@@ -78,6 +83,19 @@ const opportunitiesData = [
     location: 'Part-time, Remote',
     description: 'Help plan and execute digital marketing campaigns to grow our community outreach programs.',
     tags: ['Marketing', 'Community', 'Social Media'],
+    url: '#',
+  },
+  {
+    id: 'scholar-4',
+    title: 'Albukhary International University Scholarship',
+    organization: 'Albukhary International University (AIU)',
+    type: 'Scholarship',
+    level: 'Bachelors',
+    field: 'Various Fields',
+    location: 'Malaysia (On-Campus)',
+    description: 'AIU offers scholarships for talented students from diverse backgrounds, focusing on social enterprise and holistic development. Check their admissions page for details.',
+    tags: ['Bachelors', 'Malaysia', 'Social Enterprise'],
+    url: 'https://aiu.edu.my/admissions-and-applications/',
   },
 ];
 
@@ -127,8 +145,10 @@ export default function OpportunitiesPage() {
             ))}
             <Badge variant="outline" className="text-xs flex items-center gap-1"><MapPin size={12}/>{opp.location}</Badge>
           </div>
-          <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-            Learn More & Apply
+          <Button asChild className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+            <a href={opp.url} target="_blank" rel="noopener noreferrer">
+              Learn More & Apply
+            </a>
           </Button>
         </CardFooter>
       </Card>
