@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useMemo, FormEvent } from 'react';
@@ -20,8 +19,6 @@ export default function CoursesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedCourses, setSearchedCourses] = useState<YoutubeCourse[] | null>(null);
 
-  const featuredCourse = useMemo(() => youtubeCoursesData.find(course => course.isFeatured), []);
-
   const handleSearch = (event?: FormEvent<HTMLFormElement>) => {
     event?.preventDefault();
     if (searchTerm.trim() === '') {
@@ -31,7 +28,7 @@ export default function CoursesPage() {
       return;
     }
     const results = youtubeCoursesData.filter(course =>
-      !course.isFeatured && (
+      (
         course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         course.description.toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -60,9 +57,9 @@ export default function CoursesPage() {
     }
     if (selectedCategory) {
       if (selectedCategory === 'All') {
-        return youtubeCoursesData.filter(course => !course.isFeatured);
+        return youtubeCoursesData;
       }
-      return youtubeCoursesData.filter(course => course.category === selectedCategory && !course.isFeatured);
+      return youtubeCoursesData.filter(course => course.category === selectedCategory);
     }
     return []; // No category selected, no search active
   }, [selectedCategory, searchedCourses]);
@@ -161,46 +158,41 @@ export default function CoursesPage() {
             </p>
           </form>
 
-          {/* Featured Course */}
-          {featuredCourse && !searchTerm && !selectedCategory && ( // Show featured course only if no search/filter active
-            <section className="mb-12 p-6 md:p-8 rounded-xl shadow-2xl bg-gradient-to-br from-card via-card/90 to-accent/10 border border-primary/20 backdrop-blur-md">
-              <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
-                <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg group">
-                  <Image
-                    src={featuredCourse.thumbnailUrl}
-                    alt={featuredCourse.title}
-                    fill={true}
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    data-ai-hint={featuredCourse.imageHint}
-                  />
-                  <Link
-                    href={`https://www.youtube.com/watch?v=${featuredCourse.youtubeVideoId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center"
-                    aria-label={`Watch featured course: ${featuredCourse.title}`}
-                  >
-                    <YoutubeIcon size={64} className="text-white/80 group-hover:text-white transition-opacity duration-300" />
-                  </Link>
+          {/* Featured Courses Section */}
+          {!searchTerm && !selectedCategory && (
+            <section className="mb-12">
+              <div className="text-center mb-8">
+                <span className="inline-block bg-accent text-accent-foreground px-4 py-1.5 text-sm font-semibold rounded-full uppercase tracking-wider shadow-md">
+                  Featured Resources
+                </span>
+              </div>
+              <div className="flex flex-wrap justify-center items-start gap-6">
+                {/* Card 1: Alison */}
+                <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
+                  <img src="https://cdn.alison.com/course/intro/524/alison-courseware-introduction-to-english-grammar.jpg" alt="Alison Free English Course" style={{width: '100%', borderRadius: '8px'}} />
+                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>Introduction to English Grammar (Alison)</h3>
+                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>A structured online course designed to help beginners understand the basics of English grammar and communication.</p>
+                  <a href="https://alison.com/course/introduction-to-english-grammar" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block', marginTop: '10px', padding: '8px 16px', background: '#0a9396', color: '#fff', textDecoration: 'none', borderRadius: '8px', fontSize: '0.9em'}}>Start Course Free</a>
                 </div>
-                <div>
-                  <span className="inline-block bg-accent text-accent-foreground px-3 py-1 text-xs font-semibold rounded-full mb-3 uppercase tracking-wider">
-                    Featured Course
-                  </span>
-                  <BlurText text={featuredCourse.title} className="text-2xl md:text-3xl font-bold mb-3 font-headline text-primary" />
-                  <p className="text-muted-foreground mb-4 text-sm md:text-base line-clamp-3">
-                    {featuredCourse.description || 'Discover this amazing course to kickstart your learning!'}
-                  </p>
-                  <div className="flex items-center text-sm text-muted-foreground mb-6 gap-4">
-                    <span><strong className="text-foreground">{featuredCourse.duration}</strong></span>
-                    {featuredCourse.channelName && <span>From: <strong className="text-foreground">{featuredCourse.channelName}</strong></span>}
-                  </div>
-                  <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md transition-transform hover:scale-105">
-                    <Link href={`https://www.youtube.com/watch?v=${featuredCourse.youtubeVideoId}`} target="_blank" rel="noopener noreferrer">
-                      <YoutubeIcon size={20} className="mr-2" />
-                      Start Learning Now
-                    </Link>
-                  </Button>
+                {/* Card 2: YouTube */}
+                <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
+                  <iframe width="100%" height="162" style={{borderRadius: '8px', border: 'none'}}
+                    src="https://www.youtube.com/embed/-RXsK9_bk6s" 
+                    title="Learn English Conversation for Beginners"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+                  </iframe>
+                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>English Conversation for Beginners</h3>
+                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>Perfect for starting English with daily use phrases and simple dialogues.</p>
+                </div>
+                {/* Card 3: YouTube */}
+                <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
+                  <iframe width="100%" height="162" style={{borderRadius: '8px', border: 'none'}}
+                    src="https://www.youtube.com/embed/v6EQz4hGP3g"
+                    title="English Speaking Course - Day 1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+                  </iframe>
+                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>English Speaking Course – Day 1</h3>
+                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>Start with easy daily English speaking practice for beginners.</p>
                 </div>
               </div>
             </section>
@@ -208,7 +200,7 @@ export default function CoursesPage() {
           
           {/* Course Grid Area */}
           <div>
-            {showPrompt && !featuredCourse && ( // Show prompt only if featured course is also not shown
+            {showPrompt && !(!searchTerm && !selectedCategory) && ( // Hide prompt if featured section is shown
                  <div className="text-center py-10 my-8 bg-muted/50 rounded-lg shadow">
                     <ListFilter size={48} className="mx-auto text-muted-foreground mb-4" />
                     <BlurText text="Discover Your Next Skill" className="text-2xl font-semibold mb-2 font-headline text-primary" />

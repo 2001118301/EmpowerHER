@@ -22,7 +22,6 @@ export interface YoutubeCourse {
   category: CourseCategory;
   duration: string;
   channelName?: string;
-  isFeatured?: boolean;
   imageHint: string;
 }
 
@@ -50,7 +49,6 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     category: 'Literacy & Communication',
     duration: 'Varies',
     channelName: 'YouTube',
-    isFeatured: true, // First item is featured
     imageHint: 'speaking communication',
   },
   {
