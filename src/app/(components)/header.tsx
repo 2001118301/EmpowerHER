@@ -2,6 +2,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -74,26 +75,13 @@ export function Header() {
 
 
   const Logo = ({ className }: { className?: string }) => (
-    <svg
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
-      className={cn("text-primary", className)}
-    >
-      <path d="M8.5 7.5L6.5 4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M12 6L12 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M15.5 7.5L17.5 4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M17.5 11L20.5 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M17.5 15L20.5 16" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M6.5 11L3.5 10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path d="M6.5 15L3.5 16" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-      <path 
-        d="M8.5 10.5 C 7.5 9.5, 7 10, 7 11 V 21 H 17 V 14 C 17 12, 16 11, 15 11 C 14.5 11, 14 11.2, 13.5 11.5 L 10.5 8 C 10 7.5, 9.5 7.5, 9 8 C 8.5 8.5, 8.5 9, 9 9.5 L 11.5 12.5 C 10.5 12, 9.5 11.5, 8.5 10.5 Z"
-      />
-      <path
-        d="M17 14.5 C 18.5 14.5, 19.5 15.5, 19.5 16.5 C 19.5 17.5, 18.5 18.5, 17 18.5 C 16 18.5, 15.5 17.5, 16 16.5 C 16.2 16, 17 14.5, 17 14.5 Z"
-      />
-    </svg>
+    <Image 
+      src="https://ik.imagekit.io/rmlbayysp/1750519855470-ChatGPT_Image_Jun_21__2025__11_23_41_PM-removebg-preview_bWCGGUBkC.png" 
+      alt="EmpowerHER Logo"
+      width={40}
+      height={40}
+      className={cn(className)}
+    />
   );
 
   return (
