@@ -52,17 +52,6 @@ export const youtubeCoursesData: YoutubeCourse[] = [
     imageHint: 'speaking communication',
   },
   {
-    id: 'lit-comm-1',
-    title: 'How to Communicate Clearly and Concisely',
-    description: 'A free mini-training on clear and concise communication, available on YouTube.',
-    thumbnailUrl: 'https://placehold.co/600x400.png?text=Clear+Communication',
-    externalUrl: 'https://www.youtube.com/results?search_query=Communicate+Clearly+Concise+Training',
-    category: 'Literacy & Communication',
-    duration: 'Varies',
-    channelName: 'YouTube',
-    imageHint: 'communication presentation',
-  },
-  {
     id: 'lit-comm-2',
     title: 'Free Spoken English Tips Playlist',
     description: 'A collection of tips and lessons for improving spoken English, via YouTube playlists.',
