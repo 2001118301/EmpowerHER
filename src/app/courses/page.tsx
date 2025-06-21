@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo, FormEvent } from 'react';
@@ -167,12 +168,15 @@ export default function CoursesPage() {
                 </span>
               </div>
               <div className="flex flex-wrap justify-center items-start gap-6">
-                {/* Card 1: Alison */}
+                {/* Card 1: Replaced YouTube Video */}
                 <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
-                  <img src="https://cdn.alison.com/course/intro/524/alison-courseware-introduction-to-english-grammar.jpg" alt="Alison Free English Course" style={{width: '100%', borderRadius: '8px'}} />
-                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>Introduction to English Grammar (Alison)</h3>
-                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>A structured online course designed to help beginners understand the basics of English grammar and communication.</p>
-                  <a href="https://alison.com/course/introduction-to-english-grammar" target="_blank" rel="noopener noreferrer" style={{display: 'inline-block', marginTop: '10px', padding: '8px 16px', background: '#0a9396', color: '#fff', textDecoration: 'none', borderRadius: '8px', fontSize: '0.9em'}}>Start Course Free</a>
+                  <iframe width="100%" height="162" style={{borderRadius: '8px', border: 'none'}}
+                    src="https://www.youtube.com/embed/YJXUOJKtn8o"
+                    title="How to Communicate Clearly and Concisely"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen>
+                  </iframe>
+                  <h3 style={{marginTop: '12px', fontSize: '1.2em', color: '#333'}}>How to Communicate Clearly and Concisely</h3>
+                  <p style={{color: '#555', fontSize: '0.9em', lineHeight: 1.5}}>A free mini-training on clear and concise communication, available on YouTube.</p>
                 </div>
                 {/* Card 2: YouTube */}
                 <div style={{maxWidth: '320px', padding: '16px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', background: '#fff', fontFamily: 'sans-serif', border: '1px solid #eee'}}>
